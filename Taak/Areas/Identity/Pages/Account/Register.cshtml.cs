@@ -18,6 +18,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Taak.Data;
+using Taak.Models;
+using Taak.Repository;
 
 namespace Taak.Areas.Identity.Pages.Account
 {
@@ -30,12 +33,18 @@ namespace Taak.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly CustomerRepository customerRepository;
+        private readonly TasksWorkerRepository taskWorkerRepository;
+
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+             RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext db)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +52,10 @@ namespace Taak.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+
+            _roleManager = roleManager;
+            taskWorkerRepository = new TasksWorkerRepository(db);
+            customerRepository = new CustomerRepository(db);
         }
 
         /// <summary>
@@ -97,6 +110,20 @@ namespace Taak.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            [Required]
+            public string UserType { get; set; }
+
+            [Required]
+            public string Name { get; set; } = null!;
+            public string City { get; set; } = null!;
+            public string Street { get; set; } = null!;
+            public string Building { get; set; } = null!;
+            public string? Floor { get; set; }
+            public string County { get; set; } = null!;
+            public string Country { get; set; } = null!;
+            [Phone]
+            [Required]
+            public string Phone { get; set; } = null!;
         }
 
 
@@ -122,7 +149,51 @@ namespace Taak.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    string roleName = Input.UserType;
+                    if (null != _roleManager.FindByNameAsync(roleName).Result)
+                    {
+                        await _userManager.AddToRoleAsync(user, roleName);
+                    }
                     var userId = await _userManager.GetUserIdAsync(user);
+
+                    if (roleName == "Customer")
+                    {
+                        var customer = new CustomerModel()
+                        {
+                            IdCustomer = Guid.NewGuid(),
+                            UserId = userId,
+                            Name = Input.Name,
+                            City = Input.City,
+                            Street = Input.Street,
+                            Building = Input.Building,
+                            Floor = Input.Floor,
+                            County = Input.County,
+                            Country = Input.Country,
+                            Phone = Input.Phone
+                        };
+                        customerRepository.Insert(customer);
+
+                    }
+                    else if (roleName == "Worker")
+                    {
+                        var taskWorker = new TasksWorkerModel()
+                        {
+                            IdTaskWorker = Guid.NewGuid(),
+                            UserId = userId,
+                            Name = Input.Name,
+                            City = Input.City,
+                            Street = Input.Street,
+                            Building = Input.Building,
+                            Floor = Input.Floor,
+                            County = Input.County,
+                            Country = Input.Country,
+                            Phone = Input.Phone
+                        };
+                        taskWorkerRepository.Insert(taskWorker);
+                    }
+
+
+                    //var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

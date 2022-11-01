@@ -134,7 +134,7 @@ namespace Taak.Data
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasKey(e => e.IdCustomer)
-                    .HasName("PK__Customer__DB43864A79A1F483");
+                    .HasName("PK__Customer__DB43864A04DEF9FF");
 
                 entity.Property(e => e.IdCustomer).ValueGeneratedNever();
 
@@ -171,18 +171,12 @@ namespace Taak.Data
                     .IsUnicode(false);
 
                 entity.Property(e => e.UserId).HasMaxLength(450);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Customers_AspNetUsers");
             });
 
             modelBuilder.Entity<Offer>(entity =>
             {
                 entity.HasKey(e => e.IdOffer)
-                    .HasName("PK__Offers__333FAA496FDC0A9F");
+                    .HasName("PK__Offers__333FAA493A474C69");
 
                 entity.Property(e => e.IdOffer).ValueGeneratedNever();
 
@@ -214,7 +208,7 @@ namespace Taak.Data
             modelBuilder.Entity<TaakTask>(entity =>
             {
                 entity.HasKey(e => e.IdTask)
-                    .HasName("PK__TaakTask__9FCAD1C5377FDBAD");
+                    .HasName("PK__TaakTask__9FCAD1C5515349C5");
 
                 entity.Property(e => e.IdTask).ValueGeneratedNever();
 
@@ -292,7 +286,7 @@ namespace Taak.Data
             modelBuilder.Entity<TasksWorker>(entity =>
             {
                 entity.HasKey(e => e.IdTaskWorker)
-                    .HasName("PK__TasksWor__0663242440F35082");
+                    .HasName("PK__TasksWor__06632424D6767A8B");
 
                 entity.Property(e => e.IdTaskWorker).ValueGeneratedNever();
 
@@ -329,12 +323,6 @@ namespace Taak.Data
                     .IsUnicode(false);
 
                 entity.Property(e => e.UserId).HasMaxLength(450);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.TasksWorkers)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TasksWorkers_AspNetUsers");
             });
 
             OnModelCreatingPartial(modelBuilder);

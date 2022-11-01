@@ -10,8 +10,6 @@ namespace Taak.Models.DBObjects
             AspNetUserClaims = new HashSet<AspNetUserClaim>();
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetUserTokens = new HashSet<AspNetUserToken>();
-            Customers = new HashSet<Customer>();
-            TasksWorkers = new HashSet<TasksWorker>();
             Roles = new HashSet<AspNetRole>();
         }
 
@@ -34,8 +32,6 @@ namespace Taak.Models.DBObjects
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<TasksWorker> TasksWorkers { get; set; }
 
         public virtual ICollection<AspNetRole> Roles { get; set; }
     }

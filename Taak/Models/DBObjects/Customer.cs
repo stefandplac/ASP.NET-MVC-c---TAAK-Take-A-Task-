@@ -21,7 +21,6 @@ namespace Taak.Models.DBObjects
         public string Country { get; set; } = null!;
         public string Phone { get; set; } = null!;
 
-        public virtual AspNetUser User { get; set; } = null!;
         public virtual ICollection<TaakTask> TaakTasks { get; set; }
     }
 }
