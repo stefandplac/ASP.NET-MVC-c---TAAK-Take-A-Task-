@@ -36,9 +36,24 @@ namespace Taak.Controllers
         }
 
         // GET: CustomerController/Create
-        public ActionResult Create()
+        public ActionResult Create(string userId)
         {
-
+            var customerId = Guid.NewGuid();
+            var model = new CustomerModel()
+            {
+                IdCustomer = customerId,
+                UserId = userId,
+                Name = "not set yet",
+                City = "not set yet",
+                Street = "not set yet",
+                Building = "not set yet",
+                Country = "not set yet",
+                County = "not set yet",
+                Phone = "0000000000",
+            };
+            customerRepository.Insert(model);
+            ViewBag.CustomerId=customerId;
+            ViewBag.UserId = userId;
             return View();
         }
 
@@ -54,8 +69,7 @@ namespace Taak.Controllers
                 task.Wait();
                 if (task.Result)
                 {
-                    model.IdCustomer = Guid.NewGuid();
-                    customerRepository.Insert(model);
+                    customerRepository.Update(model,model.IdCustomer);
                     TempData["success"] = "customer creation succeeded";
                     return RedirectToAction("Index");
                 }
@@ -65,7 +79,7 @@ namespace Taak.Controllers
             catch
             {
 
-                return RedirectToAction("Create");
+                return View("Create");
             }
         }
 

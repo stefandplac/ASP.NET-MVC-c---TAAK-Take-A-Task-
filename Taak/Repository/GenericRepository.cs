@@ -59,26 +59,24 @@ namespace Taak.Repository
         public List<TModel> GetAll()
         {
             var list = new List<TModel>();
-            var dbModel = new TModel();
+            
             foreach (var dbObject in dbSet)
             {
-                list.Add(MapDBObjectToModel(dbObject, dbModel));
+                list.Add(MapDBObjectToModel(dbObject, new TModel()));
             }
             return list;
         }
         public void Insert(TModel model)
         {
 
-            var dbObject = new T();
-
-            dbSet.Add(MapModelToDBObject(model, dbObject));
+            dbSet.Add(MapModelToDBObject(model, new T()));
             _db.SaveChanges();
         }
 
         public TModel GetById(Guid id)
         {
-            var model = new TModel();
-            return MapDBObjectToModel(dbSet.Find(id), model);
+            
+            return MapDBObjectToModel(dbSet.Find(id), new TModel());
         }
 
         public void Delete(TModel model, Guid id)

@@ -1,14 +1,23 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Taak.Data;
+using Taak.Models;
+using Taak.Repository;
 
 namespace Taak.Controllers
 {
     public class TasksWorkerController : Controller
     {
+        private readonly TasksWorkerRepository tasksWorkerRepository;
+        public TasksWorkerController(ApplicationDbContext db)
+        {
+            tasksWorkerRepository = new TasksWorkerRepository(db);
+        }
         // GET: TasksWorkerController
         public ActionResult Index()
         {
-            return View();
+            var tasksWorkers = tasksWorkerRepository.GetAll();
+            return View(tasksWorkers);
         }
 
         // GET: TasksWorkerController/Details/5
@@ -18,8 +27,24 @@ namespace Taak.Controllers
         }
 
         // GET: TasksWorkerController/Create
-        public ActionResult Create()
+        public ActionResult Create(string userId)
         {
+            var idTaskWorker = Guid.NewGuid();
+            var taskWorker = new TasksWorkerModel()
+            {
+                IdTaskWorker=idTaskWorker,
+                UserId=userId,
+                Name = "not set yet",
+                City = "not set yet",
+                Street = "not set yet",
+                Building = "not set yet",
+                Country = "not set yet",
+                County = "not set yet",
+                Phone = "0000000000",
+            };
+            tasksWorkerRepository.Insert(taskWorker);
+            ViewBag.IdTaskWorker = idTaskWorker;
+            ViewBag.UserId = userId;
             return View();
         }
 
@@ -30,11 +55,20 @@ namespace Taak.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new TasksWorkerModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    tasksWorkerRepository.Update(model,model.IdTaskWorker);
+                    TempData["success"] = "profile was successfully created";
+                    return RedirectToAction("Index");
+                }
+                return View("Create");
             }
             catch
             {
-                return View();
+                return View("Create");
             }
         }
 

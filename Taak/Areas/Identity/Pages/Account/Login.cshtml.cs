@@ -122,11 +122,11 @@ namespace Taak.Areas.Identity.Pages.Account
                     var roles = await _userManager.GetRolesAsync(user);
                     if (roles.Contains("Customer"))
                     {
-                        return RedirectToAction("Index", "TaakTask", userId);
+                        return RedirectToAction("Index", "Customer", new { userId = userId });
                     }
                     else if (roles.Contains("Worker"))
                     {
-                        return RedirectToAction("Index", "Offer", userId);
+                        return RedirectToAction("Index", "TaskWorker", new { userId = userId });
                     }
                 }
                 if (result.RequiresTwoFactor)

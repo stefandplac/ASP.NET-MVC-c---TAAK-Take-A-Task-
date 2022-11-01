@@ -43,8 +43,8 @@ namespace Taak.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-             RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext db)
+             RoleManager<IdentityRole> roleManager
+           )
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -54,8 +54,7 @@ namespace Taak.Areas.Identity.Pages.Account
             _emailSender = emailSender;
 
             _roleManager = roleManager;
-            taskWorkerRepository = new TasksWorkerRepository(db);
-            customerRepository = new CustomerRepository(db);
+            
         }
 
         /// <summary>
@@ -113,17 +112,7 @@ namespace Taak.Areas.Identity.Pages.Account
             [Required]
             public string UserType { get; set; }
 
-            [Required]
-            public string Name { get; set; } = null!;
-            public string City { get; set; } = null!;
-            public string Street { get; set; } = null!;
-            public string Building { get; set; } = null!;
-            public string? Floor { get; set; }
-            public string County { get; set; } = null!;
-            public string Country { get; set; } = null!;
-            [Phone]
-            [Required]
-            public string Phone { get; set; } = null!;
+           
         }
 
 
@@ -155,42 +144,16 @@ namespace Taak.Areas.Identity.Pages.Account
                         await _userManager.AddToRoleAsync(user, roleName);
                     }
                     var userId = await _userManager.GetUserIdAsync(user);
-
                     if (roleName == "Customer")
                     {
-                        var customer = new CustomerModel()
-                        {
-                            IdCustomer = Guid.NewGuid(),
-                            UserId = userId,
-                            Name = Input.Name,
-                            City = Input.City,
-                            Street = Input.Street,
-                            Building = Input.Building,
-                            Floor = Input.Floor,
-                            County = Input.County,
-                            Country = Input.Country,
-                            Phone = Input.Phone
-                        };
-                        customerRepository.Insert(customer);
-
+                        return RedirectToAction("Create", "Customer", new { userId=userId });
                     }
                     else if (roleName == "Worker")
                     {
-                        var taskWorker = new TasksWorkerModel()
-                        {
-                            IdTaskWorker = Guid.NewGuid(),
-                            UserId = userId,
-                            Name = Input.Name,
-                            City = Input.City,
-                            Street = Input.Street,
-                            Building = Input.Building,
-                            Floor = Input.Floor,
-                            County = Input.County,
-                            Country = Input.Country,
-                            Phone = Input.Phone
-                        };
-                        taskWorkerRepository.Insert(taskWorker);
+                        return RedirectToAction("Create","TasksWorker",new { userId=userId });
                     }
+
+                    
 
 
                     //var userId = await _userManager.GetUserIdAsync(user);
