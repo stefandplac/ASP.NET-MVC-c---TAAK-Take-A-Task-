@@ -2275,11 +2275,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\dotnet06\\TAAK\\Taak\\Taak.csproj",
+      "projectUniqueName": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\Taak.csproj",
       "projectName": "Taak",
-      "projectPath": "D:\\dotnet06\\TAAK\\Taak\\Taak.csproj",
+      "projectPath": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\Taak.csproj",
       "packagesPath": "C:\\Users\\dumea\\.nuget\\packages\\",
-      "outputPath": "D:\\dotnet06\\TAAK\\Taak\\obj\\",
+      "outputPath": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

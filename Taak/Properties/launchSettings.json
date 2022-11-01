@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -10,12 +10,13 @@
   "profiles": {
     "Taak": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7227;http://localhost:5227",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__DefaultConnection": "Data Source=LAPTOP-585FI51K\\\\SQLEXPRESS;Initial Catalog=taak;Integrated Security=True;MultipleActiveResultSets=True"
+      },
+      "applicationUrl": "https://localhost:7227;http://localhost:5227",
+      "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
