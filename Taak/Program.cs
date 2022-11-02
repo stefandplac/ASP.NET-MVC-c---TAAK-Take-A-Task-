@@ -19,7 +19,10 @@ namespace Taak
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddSession();
+            
             builder.Services.AddControllersWithViews();
+
 
             var app = builder.Build();
 
@@ -41,6 +44,7 @@ namespace Taak
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapControllerRoute(

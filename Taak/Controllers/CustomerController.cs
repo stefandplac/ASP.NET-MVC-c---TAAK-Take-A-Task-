@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 using Taak.Data;
 using Taak.Models;
@@ -16,7 +17,7 @@ namespace Taak.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
-
+            
             List<CustomerModel> customers = customerRepository.GetAll().ToList();
             
             
@@ -38,6 +39,8 @@ namespace Taak.Controllers
         // GET: CustomerController/Create
         public ActionResult Create(string userId)
         {
+            
+
             var customerId = Guid.NewGuid();
             var model = new CustomerModel()
             {
@@ -71,6 +74,7 @@ namespace Taak.Controllers
                 {
                     customerRepository.Update(model,model.IdCustomer);
                     TempData["success"] = "customer creation succeeded";
+                    
                     return RedirectToAction("Index");
                 }
 

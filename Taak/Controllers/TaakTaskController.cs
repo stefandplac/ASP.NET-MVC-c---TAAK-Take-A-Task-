@@ -23,7 +23,15 @@ namespace Taak.Controllers
 
             return View(taakTasks);
         }
-        
+
+        //get method -- returns taakTasksByUser
+        public ActionResult IndexByUser()
+        {
+            var idUser = HttpContext.Session.GetString("UserId");
+            
+            return View();
+        }
+
 
         // GET: TaakTaskController/Details/5
         public ActionResult Details(Guid id)

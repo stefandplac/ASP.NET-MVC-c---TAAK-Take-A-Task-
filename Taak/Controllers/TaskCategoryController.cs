@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Taak.Controllers
 {
+    
     public class TaskCategoryController : Controller
     {
         // GET: TaskCategoryController
@@ -10,6 +11,8 @@ namespace Taak.Controllers
         {
             return View();
         }
+
+       
 
         // GET: TaskCategoryController/Details/5
         public ActionResult Details(int id)

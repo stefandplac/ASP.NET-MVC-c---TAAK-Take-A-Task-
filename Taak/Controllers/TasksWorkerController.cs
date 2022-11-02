@@ -16,6 +16,7 @@ namespace Taak.Controllers
         // GET: TasksWorkerController
         public ActionResult Index()
         {
+            var idUser = HttpContext.Session.GetString("UserId");
             var tasksWorkers = tasksWorkerRepository.GetAll();
             return View(tasksWorkers);
         }

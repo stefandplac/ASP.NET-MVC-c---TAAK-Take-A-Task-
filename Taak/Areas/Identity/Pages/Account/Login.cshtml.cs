@@ -109,24 +109,29 @@ namespace Taak.Areas.Identity.Pages.Account
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
+            var result1 = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(Input.Email);
-                var userId = user.Id;
+                
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in."); 
+                    _logger.LogInformation("User logged in.");
+
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var userId = user.Id;
                     var roles = await _userManager.GetRolesAsync(user);
+                    HttpContext.Session.SetString("UserId", userId);
                     if (roles.Contains("Customer"))
                     {
                         return RedirectToAction("Index", "Customer", new { userId = userId });
                     }
                     else if (roles.Contains("Worker"))
                     {
-                        return RedirectToAction("Index", "TaskWorker", new { userId = userId });
+                        return RedirectToAction("Index", "TasksWorker", new { userId = userId });
                     }
                 }
                 if (result.RequiresTwoFactor)
