@@ -1,0 +1,66 @@
+﻿@model Taak.Models.OfferModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_WorkerCMSLayout";
+}
+
+<h1>Create</h1>
+
+<h4>Make an Offer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdOffer" class="control-label"></label>
+                <input asp-for="IdOffer" class="form-control" />
+                <span asp-validation-for="IdOffer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTask" class="control-label"></label>
+                <input asp-for="IdTask" class="form-control" />
+                <span asp-validation-for="IdTask" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTaskWorker" class="control-label"></label>
+                <input asp-for="IdTaskWorker" class="form-control" />
+                <span asp-validation-for="IdTaskWorker" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Buget" class="control-label"></label>
+                <input asp-for="Buget" class="form-control" />
+                <span asp-validation-for="Buget" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecialRequirements" class="control-label"></label>
+                <input asp-for="SpecialRequirements" class="form-control" />
+                <span asp-validation-for="SpecialRequirements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskStartDate" class="control-label"></label>
+                <input asp-for="TaskStartDate" class="form-control" />
+                <span asp-validation-for="TaskStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstimatedTime" class="control-label"></label>
+                <input asp-for="EstimatedTime" class="form-control" />
+                <span asp-validation-for="EstimatedTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsAccepted" class="control-label"></label>
+                <input asp-for="IsAccepted" class="form-control" />
+                <span asp-validation-for="IsAccepted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

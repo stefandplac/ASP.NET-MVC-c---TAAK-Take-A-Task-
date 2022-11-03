@@ -26,8 +26,8 @@ namespace Taak.Models.DBObjects
         public string County { get; set; } = null!;
         public string Country { get; set; } = null!;
 
-        public virtual TaskCategory IdTaskCategory1 { get; set; } = null!;
-        public virtual Customer IdTaskCategoryNavigation { get; set; } = null!;
+        public virtual Customer IdCustomerNavigation { get; set; } = null!;
+        public virtual TaskCategory IdTaskCategoryNavigation { get; set; } = null!;
         public virtual ICollection<Offer> Offers { get; set; }
     }
 }

@@ -8,9 +8,10 @@
 <div class=" d-flex pt-5 justify-content-between m-0  p-0">
 
     <div id="customerMenu" class="container-fluid d-flex flex-column gap-2 col-2 mt-2 border-right">
-        <a asp-controller="Customer" asp-action="Profile" asp-area="" >Profil</a>
+        <a asp-controller="Customer" asp-action="CustomerProfile" asp-area="" >Profil</a>
         <a asp-controller="TaakTask" asp-action="Create" asp-area="" >Publica Task</a>        
-        <a asp-controller="TaakTask" asp-action="Index" asp-area="" >Taskuri Publicate</a>
+        <a asp-controller="TaakTask" asp-action="IndexByUser" asp-area="" >Taskuri Publicate</a>
+        <a asp-controller="" asp-action="">Customer Stats</a>
     </div>
     <div id="customerRenderActionsArea" class="container-fluid col-10">
          @RenderBody()

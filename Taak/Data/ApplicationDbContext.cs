@@ -176,7 +176,7 @@ namespace Taak.Data
             modelBuilder.Entity<Offer>(entity =>
             {
                 entity.HasKey(e => e.IdOffer)
-                    .HasName("PK__Offers__333FAA493A474C69");
+                    .HasName("PK__Offers__333FAA4904841619");
 
                 entity.Property(e => e.IdOffer).ValueGeneratedNever();
 
@@ -254,13 +254,13 @@ namespace Taak.Data
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdTaskCategoryNavigation)
+                entity.HasOne(d => d.IdCustomerNavigation)
                     .WithMany(p => p.TaakTasks)
-                    .HasForeignKey(d => d.IdTaskCategory)
+                    .HasForeignKey(d => d.IdCustomer)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Tasks_Customers");
 
-                entity.HasOne(d => d.IdTaskCategory1)
+                entity.HasOne(d => d.IdTaskCategoryNavigation)
                     .WithMany(p => p.TaakTasks)
                     .HasForeignKey(d => d.IdTaskCategory)
                     .OnDelete(DeleteBehavior.ClientSetNull)

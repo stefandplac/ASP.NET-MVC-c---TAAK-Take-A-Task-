@@ -79,7 +79,7 @@ namespace Taak.Repository
             return MapDBObjectToModel(dbSet.Find(id), new TModel());
         }
 
-        public void Delete(TModel model, Guid id)
+        public void Delete(Guid id)
         {
             var dbObject = dbSet.Find(id);
             if (dbObject != null)

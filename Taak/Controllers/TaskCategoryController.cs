@@ -1,23 +1,37 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Taak.Data;
+using Taak.Models;
+using Taak.Repository;
 
 namespace Taak.Controllers
 {
     
     public class TaskCategoryController : Controller
     {
+        private readonly TaskCategoryRepository taskCategoryRepository;
+        public TaskCategoryController(ApplicationDbContext db)
+        {
+            taskCategoryRepository = new TaskCategoryRepository(db);
+        }
         // GET: TaskCategoryController
         public ActionResult Index()
         {
-            return View();
+            var taskCategories = taskCategoryRepository.GetAll();
+            return View(taskCategories);
         }
 
        
 
         // GET: TaskCategoryController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var taskCategory = taskCategoryRepository.GetById(id);
+            if (taskCategory == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(taskCategory);
         }
 
         // GET: TaskCategoryController/Create
@@ -33,7 +47,16 @@ namespace Taak.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new TaskCategoryModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    model.IdTaskCategory = Guid.NewGuid();
+                    taskCategoryRepository.Insert(model);
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
             catch
             {
@@ -42,45 +65,45 @@ namespace Taak.Controllers
         }
 
         // GET: TaskCategoryController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var taskCategory = taskCategoryRepository.GetById(id);
+            if (taskCategory == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(taskCategory);
         }
 
         // POST: TaskCategoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new TaskCategoryModel();
+                var task=TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    taskCategoryRepository.Update(model,model.IdTaskCategory);
+                    return RedirectToAction("Index");
+                }
+                return View("Edit");
             }
             catch
             {
-                return View();
+                return View("Edit");
             }
         }
 
         // GET: TaskCategoryController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            taskCategoryRepository.Delete(id);
+            return RedirectToAction("Index");
         }
 
-        // POST: TaskCategoryController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

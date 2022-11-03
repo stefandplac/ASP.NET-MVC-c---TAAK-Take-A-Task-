@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Taak.Data;
 using Taak.Models;
@@ -14,20 +15,25 @@ namespace Taak.Controllers
             tasksWorkerRepository = new TasksWorkerRepository(db);
         }
         // GET: TasksWorkerController
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            var idUser = HttpContext.Session.GetString("UserId");
+            
             var tasksWorkers = tasksWorkerRepository.GetAll();
             return View(tasksWorkers);
         }
+        
 
         // GET: TasksWorkerController/Details/5
-        public ActionResult Details(int id)
+        [Authorize(Roles="Worker,Admin")]
+        public ActionResult Details(Guid id)
         {
+
             return View();
         }
 
         // GET: TasksWorkerController/Create
+       
         public ActionResult Create(string userId)
         {
             var idTaskWorker = Guid.NewGuid();
@@ -52,6 +58,7 @@ namespace Taak.Controllers
         // POST: TasksWorkerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -74,45 +81,67 @@ namespace Taak.Controllers
         }
 
         // GET: TasksWorkerController/Edit/5
-        public ActionResult Edit(int id)
+        [Authorize(Roles="Worker")]
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var idUser = HttpContext.Session.GetString("UserId");
+            var taskWorker = tasksWorkerRepository.GetTaskWorkerByUserId(idUser);
+            return View(taskWorker);
         }
 
         // POST: TasksWorkerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [Authorize(Roles="Worker")]
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new TasksWorkerModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    tasksWorkerRepository.Update(model,model.IdTaskWorker);
+                    return RedirectToAction("WorkerProfile");
+                }
+
+                return View("Edit");
             }
             catch
             {
-                return View();
+                return View("Edit");
             }
         }
 
         // GET: TasksWorkerController/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles="Worker,Admin")]
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var idUser = HttpContext.Session.GetString("UserId");
+            var taskWorker = tasksWorkerRepository.GetTaskWorkerByUserId(idUser);
+            return View(idUser);
         }
 
         // POST: TasksWorkerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [Authorize(Roles="Worker,Admin")]
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
-            try
+           
+            tasksWorkerRepository.Delete(id);
+            if (User.IsInRole("Worker"))
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult WorkerProfile()
+        {
+            var idUser = HttpContext.Session.GetString("UserId");
+            var taskWorker = tasksWorkerRepository.GetTaskWorkerByUserId(idUser);
+            return View("WorkerProfile",taskWorker);
         }
     }
 }

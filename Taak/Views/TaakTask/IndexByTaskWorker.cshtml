@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Taak.Models.TaakTaskModel>
+
+@{
+    ViewData["Title"] = "IndexByTaskWorker";
+    Layout = "_WorkerCMSLayout";
+}
+
+<h1>IndexByTaskWorker</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+           <th>
+                @Html.DisplayNameFor(model => model.IdTask)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTaskCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCustomer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Buget)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialRequirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Building)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.County)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           <td>
+                @Html.DisplayFor(modelItem => item.IdTask)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTaskCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialRequirements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Building)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.County)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+               <a asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task Offer</a>
+               <a asp-controller="Offer" asp-action="Create" asp-route-idTask="@item.IdTask">Make an Offer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

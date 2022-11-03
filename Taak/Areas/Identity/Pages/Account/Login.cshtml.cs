@@ -127,11 +127,11 @@ namespace Taak.Areas.Identity.Pages.Account
                     HttpContext.Session.SetString("UserId", userId);
                     if (roles.Contains("Customer"))
                     {
-                        return RedirectToAction("Index", "Customer", new { userId = userId });
+                        return RedirectToAction("IndexByUser", "TaakTask", new { userId = userId });
                     }
                     else if (roles.Contains("Worker"))
                     {
-                        return RedirectToAction("Index", "TasksWorker", new { userId = userId });
+                        return RedirectToAction("WorkerProfile", "TasksWorker");
                     }
                 }
                 if (result.RequiresTwoFactor)

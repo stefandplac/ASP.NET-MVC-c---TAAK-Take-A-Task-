@@ -39,12 +39,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/CustomerCMS/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJDTVNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Customer/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Customer/CustomerProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3VzdG9tZXJQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Customer/Details.cshtml]
@@ -65,6 +65,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Offer/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2ZmZXJcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Offer/IndexByTaskWorker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2ZmZXJcSW5kZXhCeVRhc2tXb3JrZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Shared/blank.cshtml]
@@ -91,20 +99,64 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/Shared/_WorkerCMSLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Xb3JrZXJDTVNMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaakTask/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFha1Rhc2tcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaakTask/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFha1Rhc2tcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaakTask/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFha1Rhc2tcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaakTask/IndexByTaskWorker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFha1Rhc2tcSW5kZXhCeVRhc2tXb3JrZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaakTask/IndexByUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFha1Rhc2tcSW5kZXhCeVVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaskCategory/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0NhdGVnb3J5XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaskCategory/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0NhdGVnb3J5XERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaskCategory/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0NhdGVnb3J5XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TaskCategory/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0NhdGVnb3J5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TasksWorker/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NXb3JrZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TasksWorker/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NXb3JrZXJcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TasksWorker/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NXb3JrZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TasksWorker/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NXb3JrZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/TasksWorker/WorkerProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza3NXb3JrZXJcV29ya2VyUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dumea/Desktop/TAAK/taak/Taak/Views/_ViewImports.cshtml]

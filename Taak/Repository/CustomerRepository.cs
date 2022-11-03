@@ -11,5 +11,16 @@ namespace Taak.Repository
         {
             _dbContext = dbContext;
         }
+        public Guid GetCustomerId(string userId)
+        {
+            
+             var id= _dbContext.Customers.FirstOrDefault(x => x.UserId == userId).IdCustomer;
+            return id;
+        }
+        public CustomerModel GetCustomerByUserId(string userId)
+        {
+            var customer = MapDBObjectToModel(_dbContext.Customers.FirstOrDefault(x => x.UserId == userId),new CustomerModel());
+            return customer;
+        }
     }
 }

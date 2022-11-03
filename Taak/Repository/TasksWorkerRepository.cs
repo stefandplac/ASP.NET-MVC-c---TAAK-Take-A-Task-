@@ -12,5 +12,11 @@ namespace Taak.Repository
         {
             _db = db;
         }
+        public TasksWorkerModel GetTaskWorkerByUserId(string userId)
+        {
+            var taskWorker = MapDBObjectToModel(_db.TasksWorkers.FirstOrDefault(x => x.UserId == userId), new TasksWorkerModel());
+            return taskWorker; 
+        }
+        
     }
 }
