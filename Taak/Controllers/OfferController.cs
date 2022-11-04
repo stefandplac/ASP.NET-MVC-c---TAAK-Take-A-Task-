@@ -62,17 +62,27 @@ namespace Taak.Controllers
         // POST: OfferController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Worker")]
         public ActionResult Create(IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new OfferModel();
+                var task=TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    offerRepository.Insert(model);
+                    return RedirectToAction("IndexByTaskWorker");
+                }
+                return View("Create");
             }
             catch
             {
-                return View();
+                return View("Create");
             }
         }
+
         [Authorize(Roles ="Worker")]
         public ActionResult AcceptTaskOfferCreate(Guid idTask)
         {
@@ -104,45 +114,55 @@ namespace Taak.Controllers
         }
 
         // GET: OfferController/Edit/5
-        public ActionResult Edit(int id)
+        [Authorize(Roles ="Worker")]
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var offer = offerRepository.GetById(id);
+            if (offer == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(offer);
         }
 
         // POST: OfferController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [Authorize(Roles ="Worker")]
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new OfferModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    model.IsOriginalOfferAccepted = false;
+                    offerRepository.Update(model,model.IdOffer);
+                    return RedirectToAction("IndexByTaskWorker");
+                }
+                return View("Edit");
             }
             catch
             {
-                return View();
+                return View("Edit");
             }
         }
 
         // GET: OfferController/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles ="Worker,Admin")]
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            offerRepository.Delete(id);
+            return RedirectToAction("Index");
         }
 
-        // POST: OfferController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

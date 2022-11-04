@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Taak.Models.OfferModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminCMSLayout";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdOffer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTask)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTaskWorker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Buget)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialRequirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstimatedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAccepted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOriginalOfferAccepted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOffer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTask)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTaskWorker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialRequirements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAccepted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOriginalOfferAccepted)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

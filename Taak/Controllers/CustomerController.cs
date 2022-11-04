@@ -17,6 +17,7 @@ namespace Taak.Controllers
             customerRepository = new CustomerRepository(db);
             _userManager = userManager;
         }
+        
         // GET: CustomerController
         [Authorize(Roles="Admin")]
         public ActionResult Index()

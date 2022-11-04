@@ -23,6 +23,47 @@ namespace Taak.Controllers
             this.offerRepository = new OfferRepository(db);
             this.taskWorkerRepository = new TasksWorkerRepository(db);
         }
+        //GET METHOD searcheable index by anyone visitors inclusive
+        public ActionResult SearcheableIndex()
+        {
+            var tasksList = taakTaskRepository.GetAll();
+            var allCategories = taskCategoryRepository.GetAll().Select(cat => new {
+                                                                                    IdTaskCategory=cat.IdTaskCategory,
+                                                                                    Name=cat.Name
+                                                                                    });
+            ViewBag.AllCategories = allCategories;
+           
+            return View(tasksList);
+        }
+        //POST method searcheable index by anyone
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SearcheableIndex(string cat, string budget, string city)
+        {
+            var tasksList = taakTaskRepository.GetAll();
+            var allCategories = taskCategoryRepository.GetAll().Select(cat => new {
+                IdTaskCategory = cat.IdTaskCategory,
+                Name = cat.Name
+            });
+            var cat1 = ViewBag.cat;
+            ViewBag.AllCategories = allCategories;
+
+            
+            if (!String.IsNullOrEmpty(cat))
+            {
+
+            }
+            if (!String.IsNullOrEmpty(budget))
+            {
+
+            }
+            if (!String.IsNullOrEmpty(city))
+            {
+
+            }
+            return View(tasksList);
+        }
+
         // GET: TaakTaskController
         //access to all of the tasks is granted only to admin
         [Authorize(Roles="Admin")]
@@ -37,17 +78,15 @@ namespace Taak.Controllers
             //display only those tasks for which a taskWorker did not made an offer yet
             var idUser = HttpContext.Session.GetString("UserId");
             var idTaskWorker = taskWorkerRepository.GetTaskWorkerByUserId(idUser).IdTaskWorker;
-            var offers = offerRepository.GetAll();//.Where(item => item.IdTaskWorker == idTaskWorker);
+            var offers = offerRepository.GetAll().Where(offer => offer.IdTaskWorker == idTaskWorker).Select(offer => new { offer.IdTask });
             var taakTasks = taakTaskRepository.GetAll();
-            //var tasksWithNoOffer = taakTasks.Join(offers,
-            //                                        (t => t.IdTask),
-            //                                        (o => o.IdTask),
-            //                                        (t, o) => t
-            //                                       )
-            //                                  .Where(item=>i);
-            var tasksWithNoOffer = from taakTask in taakTasks
-                                   join offer in offers on taakTask.IdTask equals offer.IdTask
-                                   where offer.IdTaskWorker != idTaskWorker && taakTask.IdTask != offer.IdTask;
+            var tasksWithNoOffer = taakTasks.Except(
+                                             taakTasks.Join(offers,
+                                                            t=>t.IdTask,
+                                                            o=>o.IdTask,
+                                                            (t,o)=>t )   
+                                            );
+
             return View(tasksWithNoOffer);
         }
 
