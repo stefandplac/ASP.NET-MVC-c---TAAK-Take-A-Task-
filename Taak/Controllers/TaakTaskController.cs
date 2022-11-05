@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Taak.Data;
+using Taak.Libraries;
 using Taak.Models;
 using Taak.Repository;
 using Taak.ViewModels;
@@ -15,6 +16,7 @@ namespace Taak.Controllers
         private readonly CustomerRepository customerRepository;
         private readonly OfferRepository offerRepository;
         private readonly TasksWorkerRepository taskWorkerRepository;
+        private readonly CitiesByCountyRepository citiesByCountyRepository;
         public TaakTaskController(ApplicationDbContext db)
         {
             this.taakTaskRepository = new TaakTaskRepository(db);
@@ -22,46 +24,42 @@ namespace Taak.Controllers
             this.customerRepository = new CustomerRepository(db);
             this.offerRepository = new OfferRepository(db);
             this.taskWorkerRepository = new TasksWorkerRepository(db);
+            this.citiesByCountyRepository = new CitiesByCountyRepository(db);
         }
         //GET METHOD searcheable index by anyone visitors inclusive
-        public ActionResult SearcheableIndex()
+        public ActionResult SearchTaskIndex()
         {
-            var tasksList = taakTaskRepository.GetAll();
-            var allCategories = taskCategoryRepository.GetAll().Select(cat => new {
-                                                                                    IdTaskCategory=cat.IdTaskCategory,
-                                                                                    Name=cat.Name
-                                                                                    });
-            ViewBag.AllCategories = allCategories;
-           
-            return View(tasksList);
+                                                                                
+            var indexSearcheable = new IndexSearcheable(taskCategoryRepository, taakTaskRepository,citiesByCountyRepository);
+            return View(indexSearcheable);
         }
         //POST method searcheable index by anyone
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SearcheableIndex(string cat, string budget, string city)
+        public ActionResult SearchTaskIndex(IFormCollection collection)
         {
-            var tasksList = taakTaskRepository.GetAll();
-            var allCategories = taskCategoryRepository.GetAll().Select(cat => new {
-                IdTaskCategory = cat.IdTaskCategory,
-                Name = cat.Name
-            });
-            var cat1 = ViewBag.cat;
-            ViewBag.AllCategories = allCategories;
+            var cat = collection["SearchCategory"];
+            var budget = collection["SearchBudget"];
+            var city = collection["SearchCity"];
+            var indexSearcheable = new IndexSearcheable(taskCategoryRepository, taakTaskRepository, citiesByCountyRepository);
+            indexSearcheable.SearchCategory = cat;
 
-            
-            if (!String.IsNullOrEmpty(cat))
+            if (!String.IsNullOrEmpty(cat)&&cat!="All")
             {
-
+                indexSearcheable.Tasks = TasksFilters.FilterTasksByCategory(indexSearcheable.Tasks,cat);
             }
-            if (!String.IsNullOrEmpty(budget))
-            {
+            //if (!String.IsNullOrEmpty(budget))
+            //{
 
-            }
-            if (!String.IsNullOrEmpty(city))
-            {
+            //}
+            //if (!String.IsNullOrEmpty(city))
+            //{
 
-            }
-            return View(tasksList);
+            //}
+
+
+
+            return View("SearchTaskIndex", indexSearcheable);
         }
 
         // GET: TaakTaskController

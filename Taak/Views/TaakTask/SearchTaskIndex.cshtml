@@ -1,0 +1,146 @@
+﻿@model Taak.ViewModels.IndexSearcheable
+
+@{
+    ViewData["Title"] = "SearcheableIndex";
+}
+
+<h1>SearcheableIndex</h1>
+<form method="post" asp-action="SearchTaskIndex" asp-controller="TaakTask">
+    <div>
+        <select asp-for="SearchCategory">
+            <option value="All">All</option>
+            @foreach(var cat in Model.TaskCategories)
+            {
+                <option value="@cat.IdTaskCategory">@cat.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="SearchBudget">Budget</label>
+        <input type="text" asp-for="SearchBudget" class="form-control"/>
+    </div>
+    <div>
+        <label asp-for="SearchCity">City</label>
+       
+        <select asp-for="SearchCity" class="form-control">
+            <option value="All">&nbsp;==&nbsp;All&nbsp;==</option>
+            @foreach(var county in Model.CitiesByCounty )
+            {
+                @if (@county.Key == "-")
+                {
+
+                }
+                else
+                {
+                     <option value=".@county.Key" class="text-black ">== Judetul @county.Key ==</option>
+                }
+                @foreach(var city in county)
+                {
+                    <option value="@city" class="text-black-50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@city  </option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                IdTaskCategory
+            </th>
+            <th>
+                IdCustomer
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Buget
+            </th>
+            <th>
+                SpecialRequirements
+            </th>
+            <th>
+                TaskStartDate
+            </th>
+            <th>
+               TaskEndDate
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                Street
+            </th>
+            <th>
+                Building
+            </th>
+            <th>
+               Floor
+            </th>
+            <th>
+               County
+            </th>
+            <th>
+               Country
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Tasks) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTaskCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buget)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialRequirements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Building)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.County)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

@@ -24,6 +24,7 @@ namespace Taak.Data
         //public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
         //public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         //public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
+        public virtual DbSet<CitiesByCounty> CitiesByCounties { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<Offer> Offers { get; set; } = null!;
         public virtual DbSet<TaakTask> TaakTasks { get; set; } = null!;
@@ -130,6 +131,21 @@ namespace Taak.Data
             //        .WithMany(p => p.AspNetUserTokens)
             //        .HasForeignKey(d => d.UserId);
             //});
+
+            modelBuilder.Entity<CitiesByCounty>(entity =>
+            {
+                entity.ToTable("CitiesByCounty");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.County)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<Customer>(entity =>
             {
