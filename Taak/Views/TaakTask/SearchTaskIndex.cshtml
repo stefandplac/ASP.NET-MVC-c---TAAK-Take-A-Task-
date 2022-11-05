@@ -20,9 +20,9 @@
         <input type="text" asp-for="SearchBudget" class="form-control"/>
     </div>
     <div>
-        <label asp-for="SearchCity">City</label>
+        <label asp-for="SearchLocation">City</label>
        
-        <select asp-for="SearchCity" class="form-control">
+        <select asp-for="SearchLocation" class="form-control">
             <option value="All">&nbsp;==&nbsp;All&nbsp;==</option>
             @foreach(var county in Model.CitiesByCounty )
             {
@@ -32,7 +32,7 @@
                 }
                 else
                 {
-                     <option value=".@county.Key" class="text-black ">== Judetul @county.Key ==</option>
+                     <option value="#@county.Key" class="text-black ">== Judetul @county.Key ==</option>
                 }
                 @foreach(var city in county)
                 {

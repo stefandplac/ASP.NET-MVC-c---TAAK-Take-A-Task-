@@ -11,7 +11,7 @@ namespace Taak.ViewModels
 
         public string SearchCategory { get; set; }
         public string SearchBudget { get; set; }
-        public string SearchCity { get; set; }
+        public string SearchLocation { get; set; }
         public IndexSearcheable(TaskCategoryRepository taakCategoryRepository,
                                 TaakTaskRepository taakTaskRepository,
                                 CitiesByCountyRepository citiesByCountyRepository)

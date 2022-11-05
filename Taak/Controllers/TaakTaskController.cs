@@ -40,7 +40,7 @@ namespace Taak.Controllers
         {
             var cat = collection["SearchCategory"];
             var budget = collection["SearchBudget"];
-            var city = collection["SearchCity"];
+            var location = collection["SearchLocation"];
             var indexSearcheable = new IndexSearcheable(taskCategoryRepository, taakTaskRepository, citiesByCountyRepository);
             indexSearcheable.SearchCategory = cat;
 
@@ -52,10 +52,10 @@ namespace Taak.Controllers
             //{
 
             //}
-            //if (!String.IsNullOrEmpty(city))
-            //{
-
-            //}
+            if (!String.IsNullOrEmpty(location)&&location!="All")
+            {
+                indexSearcheable.Tasks = TasksFilters.FilterByCityOrCounty(indexSearcheable.Tasks, location);
+            }
 
 
 
