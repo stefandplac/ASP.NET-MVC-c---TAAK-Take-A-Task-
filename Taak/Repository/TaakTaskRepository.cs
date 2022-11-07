@@ -12,5 +12,11 @@ namespace Taak.Repository
         {
             _db = db;
         }
+        public (decimal, decimal) GetMinMax()
+        {
+            var min = base.GetAll().Min(item => item.Buget);
+            var max = base.GetAll().Max(item=>item.Buget);
+            return (min, max);
+        }
      }
 }

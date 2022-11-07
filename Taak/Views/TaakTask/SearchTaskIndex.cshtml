@@ -1,13 +1,21 @@
-﻿@model Taak.ViewModels.IndexSearcheable
-
+﻿@model Taak.ViewModels.TasksWithSearchFiltersViewModel
+@section AddToHead{
+    <link href="@Url.Content("~/css/RangeBar.css")" rel="stylesheet" type="text/css" />
+}
 @{
     ViewData["Title"] = "SearcheableIndex";
+    @if (User.IsInRole("Worker"))
+    {
+        Layout = "_WorkerCMSLayout";
+    }
 }
 
-<h1>SearcheableIndex</h1>
-<form method="post" asp-action="SearchTaskIndex" asp-controller="TaakTask">
-    <div>
-        <select asp-for="SearchCategory">
+<div class="mb-1 border-bottom">Select a task and make an offer</div>
+<form method="post" asp-action="SearchTaskIndex" asp-controller="TaakTask" id="filterTasks">
+  <div class="container d-inline-flex  ">
+    <div class="d-flex w-25 align-items-center">
+        <label asp-for="SearchCategory" class="pe-2">Category</label>
+        <select asp-for="SearchCategory" class="form-select"  onchange="$('#filterTasks').submit()">
             <option value="All">All</option>
             @foreach(var cat in Model.TaskCategories)
             {
@@ -15,14 +23,29 @@
             }
         </select>
     </div>
-    <div>
-        <label asp-for="SearchBudget">Budget</label>
-        <input type="text" asp-for="SearchBudget" class="form-control"/>
+    <div class="container d-flex w-50 align-items-center justify-content-center ">
+            <label for="Budget" class="pe-1">Budget</label>
+            <div class="wrapper">
+                    <div class="values d-flex justify-content-center">
+                        <span id="range1">
+                            0
+                        </span>
+                        <span> &dash; </span>
+                        <span id="range2">
+                            10000
+                        </span>
+                    </div>
+                    <div class="containerRange">
+                        <div class="sliderTrackRange"></div>
+                        <input asp-for="SearchBudgetMin" class="inputRange" type="range" min="@Model.BudgetMin" max="@Model.BudgetMax" value="@Model.SearchBudgetMin" id="slider-1" oninput="slideOne()" onchange="$('#filterTasks').submit()">
+                        <input asp-for="SearchBudgetMax" class="inputRange" type="range" min="@Model.BudgetMin" max="@Model.BudgetMax" value="@Model.SearchBudgetMax" id="slider-2" oninput="slideTwo()" onchange="$('#filterTasks').submit()">
+                    </div>
+            </div>
     </div>
-    <div>
-        <label asp-for="SearchLocation">City</label>
+    <div class="d-flex w-25 align-items-center">
+        <label asp-for="SearchLocation" class="pe-2">Location</label>
        
-        <select asp-for="SearchLocation" class="form-control">
+        <select asp-for="SearchLocation" class="form-control"  onchange="$('#filterTasks').submit()">
             <option value="All">&nbsp;==&nbsp;All&nbsp;==</option>
             @foreach(var county in Model.CitiesByCounty )
             {
@@ -41,106 +64,127 @@
             }
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
+   </div>
+    
 </form>
+@if (Model.Tasks.Count() != 0)
+{
 
-<table class="table">
-    <thead>
-        <tr>
-            
-            <th>
-                IdTaskCategory
-            </th>
-            <th>
-                IdCustomer
-            </th>
-            <th>
-                Title
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Buget
-            </th>
-            <th>
-                SpecialRequirements
-            </th>
-            <th>
-                TaskStartDate
-            </th>
-            <th>
-               TaskEndDate
-            </th>
-            <th>
-                City
-            </th>
-            <th>
-                Street
-            </th>
-            <th>
-                Building
-            </th>
-            <th>
-               Floor
-            </th>
-            <th>
-               County
-            </th>
-            <th>
-               Country
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Tasks) {
-        <tr>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTaskCategory)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCustomer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Buget)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpecialRequirements)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Building)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Floor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.County)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    IdTaskCategory
+                </th>
+                <th>
+                    IdCustomer
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Buget
+                </th>
+                <th>
+                    SpecialRequirements
+                </th>
+                <th>
+                    TaskStartDate
+                </th>
+                <th>
+                    TaskEndDate
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    Street
+                </th>
+                <th>
+                    Building
+                </th>
+                <th>
+                    Floor
+                </th>
+                <th>
+                    County
+                </th>
+                <th>
+                    Country
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Tasks)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdTaskCategory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCustomer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Buget)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SpecialRequirements)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Building)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Floor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.County)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Worker"))
+                        {
+                            <a asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task Offer</a>
+                            <a asp-controller="Offer" asp-action="Create" asp-route-idTask="@item.IdTask">Make Offer</a>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+else
+{
+    <div class="pt-4">
+        There are no tasks that match your search filters
+    </div>
+}
+@section Scripts {
+    <script src="~/js/RangeBar.js"></script>
+}

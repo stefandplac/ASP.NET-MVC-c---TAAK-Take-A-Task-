@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "v9o8sS/dtUE9Tpeu/+xXPm+9cUz0eRm1OFQIY3M7zRk=",
+  "Hash": "KEIFbwPhNWvaq1UITrrduEPg8sVyGztI3JGKWHU4erI=",
   "Source": "Taak",
   "BasePath": "_content/Taak",
   "Mode": "Default",
@@ -1071,6 +1071,23 @@
       "OriginalItemSpec": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Taak.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\css\\RangeBar.css",
+      "SourceId": "Taak",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
+      "BasePath": "_content/Taak",
+      "RelativePath": "css/RangeBar.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\RangeBar.css"
+    },
+    {
       "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\css\\site.css",
       "SourceId": "Taak",
       "SourceType": "Discovered",
@@ -1105,6 +1122,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\RangeBar.js",
+      "SourceId": "Taak",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
+      "BasePath": "_content/Taak",
+      "RelativePath": "js/RangeBar.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\RangeBar.js"
+    },
+    {
       "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\site.js",
       "SourceId": "Taak",
       "SourceType": "Discovered",
@@ -1120,6 +1154,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\TaskFilters.js",
+      "SourceId": "Taak",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
+      "BasePath": "_content/Taak",
+      "RelativePath": "js/TaskFilters.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\TaskFilters.js"
     },
     {
       "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

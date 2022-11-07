@@ -21,5 +21,10 @@ namespace Taak.Repository
             }
             return true;
         }
+        public List<OfferModel> GetAllOffersByWorker(Guid idTaskWorker)
+        {
+            var offersByWorker = base.GetAll().Where(offer => offer.IdTaskWorker == idTaskWorker).ToList();
+            return offersByWorker;
+        }
     }
 }

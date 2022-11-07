@@ -3,12 +3,13 @@
     ViewData["Title"] = "_WorkerCMSLayout";
     Layout = "_Layout";
 }
+@await RenderSectionAsync("AddToHead", required: false)
 
 <div class=" d-flex pt-5 justify-content-between m-0  p-0">
 
-    <div id="customerMenu" class="container-fluid d-flex flex-column gap-2 col-2 mt-2 border-right">
+    <div id="customerMenu" class="container-fluid d-flex flex-column gap-2 col-2 mt-2 border-end">
         <a asp-controller="TasksWorker" asp-action="WorkerProfile" asp-area="" >Profil</a>
-        <a asp-controller="TaakTask" asp-action="IndexByTaskWorker" asp-area="" >Alege task</a>        
+        <a asp-controller="TaakTask" asp-action="SearchTaskIndex" asp-area="" >Alege task</a>        
         <a asp-controller="Offer" asp-action="IndexByTaskWorker"  >Ofertele mele</a>
         <a asp-controller="" asp-action="" >Worker Stats</a>
     </div>
@@ -16,5 +17,6 @@
          @RenderBody()
     </div>
  </div>
-
- @await RenderSectionAsync("Scripts", required: false)
+ @section Scripts{
+     @RenderSection("Scripts",  required: false);
+ }

@@ -131,7 +131,7 @@ namespace Taak.Areas.Identity.Pages.Account
                     }
                     else if (roles.Contains("Worker"))
                     {
-                        return RedirectToAction("WorkerProfile", "TasksWorker");
+                        return RedirectToAction("SearchTaskIndex", "TaakTask");
                     }
                 }
                 if (result.RequiresTwoFactor)

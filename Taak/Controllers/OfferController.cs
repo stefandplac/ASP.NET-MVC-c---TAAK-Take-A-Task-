@@ -94,7 +94,7 @@ namespace Taak.Controllers
             if (offerRepository.CheckForExistingOffer(idTask, idTaskWorker))
             {
                 TempData["error"] = "you already made an offer for that task";
-                return RedirectToAction("IndexByTaskWorker","TaakTask");
+                return RedirectToAction("SearchTaskIndex", "TaakTask");
             }
             else
             {

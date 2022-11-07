@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Taak.Data;
-using Taak.Libraries;
+using Taak.Libraries.SearchFilters;
 using Taak.Models;
 using Taak.Repository;
 using Taak.ViewModels;
@@ -30,36 +30,43 @@ namespace Taak.Controllers
         public ActionResult SearchTaskIndex()
         {
                                                                                 
-            var indexSearcheable = new IndexSearcheable(taskCategoryRepository, taakTaskRepository,citiesByCountyRepository);
-            return View(indexSearcheable);
+            var tasks = new TasksWithSearchFiltersViewModel(taskCategoryRepository, taakTaskRepository,citiesByCountyRepository);
+            tasks.SearchBudgetMin = tasks.BudgetMin;
+            tasks.SearchBudgetMax = tasks.BudgetMax;
+            if (User.IsInRole("Worker"))
+            {
+                var idUser = HttpContext.Session.GetString("UserId");
+                tasks.Tasks = TasksFilters.FilterByWorkerWithNoOffer(tasks.Tasks, offerRepository, taskWorkerRepository, idUser);
+            }
+            return View(tasks);
         }
         //POST method searcheable index by anyone
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SearchTaskIndex(IFormCollection collection)
         {
-            var cat = collection["SearchCategory"];
-            var budget = collection["SearchBudget"];
-            var location = collection["SearchLocation"];
-            var indexSearcheable = new IndexSearcheable(taskCategoryRepository, taakTaskRepository, citiesByCountyRepository);
-            indexSearcheable.SearchCategory = cat;
+            decimal x;
+            var tasksFiltered = new TasksWithSearchFiltersViewModel(taskCategoryRepository, taakTaskRepository, citiesByCountyRepository);
+            tasksFiltered.SearchCategory = collection["SearchCategory"];
+            tasksFiltered.SearchLocation = collection["SearchLocation"];
+            tasksFiltered.SearchBudgetMin = decimal.TryParse(collection["SearchBudgetMin"], out x) ? x : 0;
+            tasksFiltered.SearchBudgetMax = decimal.TryParse(collection["SearchBudgetMax"], out x)? x : 0;
 
-            if (!String.IsNullOrEmpty(cat)&&cat!="All")
+            if (User.IsInRole("Worker"))
             {
-                indexSearcheable.Tasks = TasksFilters.FilterTasksByCategory(indexSearcheable.Tasks,cat);
+                var idUser = HttpContext.Session.GetString("UserId");
+                tasksFiltered.Tasks = TasksFilters.FilterByWorkerWithNoOffer(tasksFiltered.Tasks,offerRepository,taskWorkerRepository,idUser);
             }
-            //if (!String.IsNullOrEmpty(budget))
-            //{
-
-            //}
-            if (!String.IsNullOrEmpty(location)&&location!="All")
-            {
-                indexSearcheable.Tasks = TasksFilters.FilterByCityOrCounty(indexSearcheable.Tasks, location);
-            }
-
-
-
-            return View("SearchTaskIndex", indexSearcheable);
+           
+            tasksFiltered.Tasks = TasksFilters.FilterByCategoryByCityByBudget(tasksFiltered.Tasks,
+                                                                              tasksFiltered.SearchCategory,
+                                                                              tasksFiltered.SearchLocation,
+                                                                              tasksFiltered.SearchBudgetMin,
+                                                                              tasksFiltered.SearchBudgetMax,
+                                                                              tasksFiltered.BudgetMin,
+                                                                              tasksFiltered.BudgetMax);
+            
+            return View("SearchTaskIndex", tasksFiltered);
         }
 
         // GET: TaakTaskController

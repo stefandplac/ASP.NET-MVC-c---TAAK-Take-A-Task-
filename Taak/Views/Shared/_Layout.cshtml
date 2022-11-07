@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Taak</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" src="~/js/TaskFiltersFormAutoSubmit.js"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Taak.styles.css" asp-append-version="true" />
+    @RenderSection("AddToHead", required: false)
 </head>
 <body>
     <header>
@@ -15,7 +17,7 @@
         </div>
     </header>
     <div class="container-fluid w-75  p-o" >
-       
+      
             @RenderBody()
        
     </div>
