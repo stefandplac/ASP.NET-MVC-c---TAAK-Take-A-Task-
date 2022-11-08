@@ -7,13 +7,13 @@
 
 <div class=" d-flex pt-5 justify-content-between m-0  p-0">
 
-    <div id="customerMenu" class="container-fluid d-flex flex-column gap-2 col-2 mt-2 border-end">
-        <a asp-controller="TasksWorker" asp-action="WorkerProfile" asp-area="" >Profil</a>
-        <a asp-controller="TaakTask" asp-action="SearchTaskIndex" asp-area="" >Alege task</a>        
-        <a asp-controller="Offer" asp-action="IndexByTaskWorker"  >Ofertele mele</a>
-        <a asp-controller="" asp-action="" >Worker Stats</a>
+    <div id="customerMenu" class="container-fluid d-flex flex-column gap-2 col-2 mt-2 border-end ">
+        <a asp-controller="TasksWorker" asp-action="WorkerProfile" asp-area="" class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1">Profil</a>
+        <a asp-controller="TaakTask" asp-action="SearchTaskIndex" asp-area=""class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1" >Alege task</a>        
+        <a asp-controller="Offer" asp-action="IndexByTaskWorker"  class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1">Ofertele mele</a>
+        <a asp-controller="" asp-action="" class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1">Worker Stats</a>
     </div>
-    <div id="customerRenderActionsArea" class="container-fluid col-10">
+    <div id="customerRenderActionsArea" class="container-fluid d-flex flex-column justify-content-center col-10">
          @RenderBody()
     </div>
  </div>

@@ -8,10 +8,10 @@
 <div class=" d-flex pt-5 justify-content-between m-0  p-0">
 
     <div id="customerMenu" class="container-fluid d-flex flex-column gap-2 col-2 mt-2 border-right">
-        <a asp-controller="Customer" asp-action="CustomerProfile" asp-area="" >Profil</a>
-        <a asp-controller="TaakTask" asp-action="Create" asp-area="" >Publica Task</a>        
-        <a asp-controller="TaakTask" asp-action="IndexByUser" asp-area="" >Taskuri Publicate</a>
-        <a asp-controller="" asp-action="">Customer Stats</a>
+        <a asp-controller="Customer" asp-action="CustomerProfile" asp-area="" class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1">Profil</a>
+        <a asp-controller="TaakTask" asp-action="Create" asp-area="" class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1">Publica Task</a>        
+        <a asp-controller="TaakTask" asp-action="IndexByUser" asp-area="" class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1">Taskuri Publicate</a>
+        <a asp-controller="" asp-action="" class="text-decoration-none border-bottom pb-2 text-capitalize text-start me-2 ps-1">Customer Stats</a>
     </div>
     <div id="customerRenderActionsArea" class="container-fluid col-10">
          @RenderBody()

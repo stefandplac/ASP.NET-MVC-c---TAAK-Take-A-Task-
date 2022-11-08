@@ -78,22 +78,7 @@ namespace Taak.Controllers
 
             return View(taakTasks);
         }
-        public ActionResult IndexByTaskWorker()
-        {
-            //display only those tasks for which a taskWorker did not made an offer yet
-            var idUser = HttpContext.Session.GetString("UserId");
-            var idTaskWorker = taskWorkerRepository.GetTaskWorkerByUserId(idUser).IdTaskWorker;
-            var offers = offerRepository.GetAll().Where(offer => offer.IdTaskWorker == idTaskWorker).Select(offer => new { offer.IdTask });
-            var taakTasks = taakTaskRepository.GetAll();
-            var tasksWithNoOffer = taakTasks.Except(
-                                             taakTasks.Join(offers,
-                                                            t=>t.IdTask,
-                                                            o=>o.IdTask,
-                                                            (t,o)=>t )   
-                                            );
-
-            return View(tasksWithNoOffer);
-        }
+      
 
         //get method -- returns taakTasksByUser
         [Authorize(Roles="Customer")]

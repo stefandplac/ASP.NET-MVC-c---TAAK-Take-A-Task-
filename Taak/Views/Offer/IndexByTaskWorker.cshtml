@@ -1,78 +1,51 @@
-﻿@model IEnumerable<Taak.Models.OfferModel>
+﻿@model IEnumerable<Taak.ViewModels.OfferViewModelIndexByWorker>
 
 @{
     ViewData["Title"] = "IndexByTaskWorker";
     Layout = "_WorkerCMSLayout";
+    
 }
 
-<h1>IndexByTaskWorker</h1>
+<h4 class="ms-4">Your Offers</h4>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdOffer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTask)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTaskWorker)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Buget)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SpecialRequirements)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstimatedTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAccepted)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdOffer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTask)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTaskWorker)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Buget)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpecialRequirements)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAccepted)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+@if (Model.Count() != 0)
+{
+    @foreach(var offer in Model)
+    {
+        <partial name="_OfferByWorkerComponent" model="@offer"></partial>
+    }
+    /*implement pagination*/
+    <div class="container container-fluid w-100 flex-grow-1 d-flex justify-content-center align-items-end">
+
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination">
+             @if(Model.Count()!=0){
+                  
+                    
+                @for(var pageNumber=1;pageNumber<=ViewBag.Pages;pageNumber++)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Offer" asp-action="IndexByTaskWorker" asp-route-pageno="@pageNumber"  >@pageNumber</a>
+                    </li>
+                
+                }
+                   
+                }
+          </ul>
+        </nav>
+    </div>
+
 }
-    </tbody>
-</table>
+else{
+      <div class="pt-4">
+        You have no valid offers at the moment. <br/>Click 
+        <a asp-controller="TaakTask" asp-action="SearchTaskIndex" >here</a>
+        to see some available tasks and accept tasks offer or make a custom offer
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+
+       
+    </script>
+}

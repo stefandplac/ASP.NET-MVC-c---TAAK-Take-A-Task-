@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 using Taak.Data;
 using Taak.Models;
 using Taak.Repository;
+using Taak.ViewModels;
 
 namespace Taak.Controllers
 {
@@ -30,14 +32,32 @@ namespace Taak.Controllers
             return View(offers);
         }
         [Authorize(Roles="Worker")]
-        public ActionResult IndexByTaskWorker()
+        public ActionResult IndexByTaskWorker(string pageno)
         {
-            
+            List<OfferViewModelIndexByWorker> offersViewModelByWorker = new List<OfferViewModelIndexByWorker>();
             var idUser = HttpContext.Session.GetString("UserId");
             var idTaskWorker = taskWorkerRepository.GetTaskWorkerByUserId(idUser).IdTaskWorker;
+
+            //returns only the results needed to be display in one single page depending on the pagesize
+            int x;
+            var pageNumber = Int32.TryParse(pageno,out x)? x : 1;
+            var pageSize=5;
             var offers = offerRepository.GetAll().Where(offer => offer.IdTaskWorker == idTaskWorker);
-            return View(offers);
+            double result = offers.Count() / pageSize;
+            ViewBag.Pages = offers.Count() % pageSize != 0 ? result+1 : result;
+            ViewBag.CurrentPageNo = pageNumber;
+
+            offers = offers.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            foreach(var offer in offers)
+            {
+                var item = new OfferViewModelIndexByWorker(offer, taakTaskRepository);
+                offersViewModelByWorker.Add(item);
+            }
+            
+
+            return View(offersViewModelByWorker);
         }
+        
 
         // GET: OfferController/Details/5
         public ActionResult Details(int id)
@@ -160,7 +180,7 @@ namespace Taak.Controllers
                 return RedirectToAction("Index");
             }
             offerRepository.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexByTaskWorker");
         }
 
         
