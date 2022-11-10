@@ -39,7 +39,7 @@ namespace Taak.Controllers
                 tasks.Tasks = TasksFilters.FilterByWorkerWithNoOffer(tasks.Tasks, offerRepository, taskWorkerRepository, idUser);
             }
             //first time and only time get method is called will return default pagination
-            var pageSize = 1;
+            var pageSize = 5;
             double result = tasks.Tasks.Count() / pageSize;
             ViewBag.Pages = tasks.Tasks.Count() % pageSize != 0 ? result + 1 : result;
             ViewBag.CurrentPageNo = 1;
@@ -78,7 +78,7 @@ namespace Taak.Controllers
             //pagination filter by pagesize
             
             var pageNumber = Int32.TryParse(pageNo, out int z) ? z : 1;
-            var pageSize = 1;
+            var pageSize = 5;
             double result = tasksFiltered.Tasks.Count() / pageSize;
             ViewBag.Pages = tasksFiltered.Tasks.Count() % pageSize != 0 ? result + 1 : result;
             ViewBag.CurrentPageNo = pageNumber;

@@ -75,8 +75,7 @@
 
     <table class="table table-striped">
         <thead>
-            <tr>
-                
+            <tr class="text-muted" >                
                 <th>
                     Task
                 </th>
@@ -86,10 +85,10 @@
                 </th>
                 
                 <th>
-                    TaskStartDate
+                    Data Postarii
                 </th>
                 <th>
-                    TaskEndDate
+                    Termen Limita
                 </th>
                 <th>
                     Location
@@ -113,18 +112,20 @@
                             <div class="pb-1">
                                   @Html.DisplayFor(modelItem => item.Description)
                             </div>
-                            <div class="text-danger">
+                            @if(!String.IsNullOrEmpty(@item.SpecialRequirements))
+                            {
+                            <div class="text-light border rounded p-1 border-white bg-warning" >
                                  @Html.DisplayFor(modelItem => item.SpecialRequirements)
                             </div>
-                               
+                            }
                                
                                 
                         </div>
                     </td>
                    
                     <td>
-                        <div class="badge bg-primary text-wrap" style="width: auto;min-width:3rem;">
-                             @item.Buget.ToString("#")
+                        <div class="badge  text-wrap  align-self-center" style="width: auto;min-width:3rem;min-height:2rem;font-size:14px;color:#ffff66;background-color:#6699ff">
+                             @item.Buget.ToString("#") <br/><span style="font-size:10px;">RON</span>
                         </div>
                     </td>
                     
@@ -132,7 +133,7 @@
                         @Html.DisplayFor(modelItem => item.TaskStartDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TaskEndDate)
+                        @item.TaskEndDate
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.City)
@@ -144,11 +145,11 @@
                         @Html.DisplayFor(modelItem => item.County)
                     </td>
                     
-                    <td>
+                    <td class="m-4">
                         @if (User.IsInRole("Worker"))
                         {
-                            <a asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task</a>
-                            <a asp-controller="Offer" asp-action="Create" asp-route-idTask="@item.IdTask">Make Offer</a>
+                            <a class="page-link rounded text-light text-center" style="background-color:#99d992" asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task</a>
+                            <a class="page-link rounded text-light text-center" style="background-color:#7bbac9" asp-controller="Offer" asp-action="Create" asp-route-idTask="@item.IdTask">Make Offer</a>
                         }
 
                     </td>
