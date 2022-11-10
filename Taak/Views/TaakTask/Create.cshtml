@@ -5,9 +5,10 @@
     Layout = "_CustomerCMSLayout";
 }
 
-<h1>Create</h1>
+<div class="container w-100 bg-light p-4">
 
-<h4>TaakTaskViewModelCreate</h4>
+
+<h5>Create Task</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,11 +18,13 @@
             <div class="form-group">
                 <label asp-for="IdTaskCategory" class="control-label">Category</label>
                 <select asp-for="IdTaskCategory" class="form-select">
+                    <option value=""></option>
                 @foreach(var item in Model.TaskCategories)
                 {
                     <option value="@item.IdTaskCategory">@item.Name</option>
                 }
                 </select>
+                <span asp-validation-for="IdTaskCategory" class="text-danger"></span>
             </div>
             
             <div class="form-group">
@@ -36,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Buget" class="control-label"></label>
-                <input asp-for="Buget" class="form-control" />
+                <input asp-for="Buget" class="form-control" min="10" type="number" value="10"/>
                 <span asp-validation-for="Buget" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -56,7 +59,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
+                <select asp-for="City" class="form-select">
+                    <option value=""></option>
+                    @foreach(var city in Model.Cities)
+                    {
+                        <option value="@city">@city</option>
+                    }
+                </select>
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -74,16 +83,7 @@
                 <input asp-for="Floor" class="form-control" />
                 <span asp-validation-for="Floor" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="County" class="control-label"></label>
-                <input asp-for="County" class="form-control" />
-                <span asp-validation-for="County" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -94,7 +94,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

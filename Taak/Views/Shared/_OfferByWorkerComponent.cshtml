@@ -6,7 +6,7 @@
         
         <div class="w-50 ps-2 border-top">
             Detalii oferta:
-            @if ((bool)Model.IsOriginalOfferAccepted&&Model.IsOriginalOfferAccepted!=null)
+            @if ((bool)Model.IsOriginalOfferAccepted)
             {
                 <div class="text-primary">
                     The offer is made by accepting the task conditions
@@ -20,10 +20,10 @@
                 </div>
                 <div class="container w-100 d-flex flex-column m-0 p-0 collapse" th:id= {offerDetails${id}}>
                     <div class="container d-flex w-100 justify-content-between m-0 p-0">
-                        @if (String.IsNullOrEmpty(@Model.Buget.ToString()))
+                        @if (@Model.Buget!=0)
                         {
                             <div class="w-50">
-                                Budget: @Model.Buget
+                                Budget: @Model.Buget.ToString("#")
                             </div>
                         }
                         <div class="w-50 d-flex flex-column m-0 p-0">
@@ -33,10 +33,10 @@
                                     Start Date: @Model.TaskStartDate
                             </div>
                             }
-                            @if (!String.IsNullOrEmpty(@Model.EstimatedTime.ToString()))
+                            @if (@Model.EstimatedTime!=null)
                             {
                             <div class="">
-                                    Estimate Time: @Model.EstimatedTime
+                                    Estimate Time: @Model.EstimatedTime.ToString();
                             </div>
                             }
                         </div>

@@ -15,13 +15,16 @@ namespace Taak.ViewModels
 
         public string SearchCategory { get; set; }
         public string SearchLocation { get; set; }
+        public int PageNumber { get; set; }
         public TasksWithSearchFiltersViewModel(TaskCategoryRepository taakCategoryRepository,
                                 TaakTaskRepository taakTaskRepository,
                                 CitiesByCountyRepository citiesByCountyRepository)
         {
             TaskCategories = taakCategoryRepository.GetAll();
             Tasks = taakTaskRepository.GetAll();
-            CitiesByCounty = citiesByCountyRepository.GetAll().ToLookup(
+            CitiesByCounty = citiesByCountyRepository.GetAll()
+                                                     .OrderBy(item=>item.County).ThenBy(item=>item.City)
+                                                     .ToLookup(
                                                                         entryKey=>entryKey.County,
                                                                         entryValue=>entryValue.City
                                                                         );

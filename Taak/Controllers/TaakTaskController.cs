@@ -38,6 +38,15 @@ namespace Taak.Controllers
                 var idUser = HttpContext.Session.GetString("UserId");
                 tasks.Tasks = TasksFilters.FilterByWorkerWithNoOffer(tasks.Tasks, offerRepository, taskWorkerRepository, idUser);
             }
+            //first time and only time get method is called will return default pagination
+            var pageSize = 1;
+            double result = tasks.Tasks.Count() / pageSize;
+            ViewBag.Pages = tasks.Tasks.Count() % pageSize != 0 ? result + 1 : result;
+            ViewBag.CurrentPageNo = 1;
+            ViewBag.PrevPage = 1;
+            ViewBag.NextPage = 1 == ViewBag.Pages ? 1 : 2;
+            tasks.Tasks = tasks.Tasks.Take(pageSize).ToList();
+
             return View(tasks);
         }
         //POST method searcheable index by anyone
@@ -51,6 +60,7 @@ namespace Taak.Controllers
             tasksFiltered.SearchLocation = collection["SearchLocation"];
             tasksFiltered.SearchBudgetMin = decimal.TryParse(collection["SearchBudgetMin"], out x) ? x : 0;
             tasksFiltered.SearchBudgetMax = decimal.TryParse(collection["SearchBudgetMax"], out x)? x : 0;
+            var pageNo = collection["PageNumber"];
 
             if (User.IsInRole("Worker"))
             {
@@ -65,7 +75,17 @@ namespace Taak.Controllers
                                                                               tasksFiltered.SearchBudgetMax,
                                                                               tasksFiltered.BudgetMin,
                                                                               tasksFiltered.BudgetMax);
+            //pagination filter by pagesize
             
+            var pageNumber = Int32.TryParse(pageNo, out int z) ? z : 1;
+            var pageSize = 1;
+            double result = tasksFiltered.Tasks.Count() / pageSize;
+            ViewBag.Pages = tasksFiltered.Tasks.Count() % pageSize != 0 ? result + 1 : result;
+            ViewBag.CurrentPageNo = pageNumber;
+            ViewBag.PrevPage = pageNumber == 1 ? 1 : pageNumber - 1;
+            ViewBag.NextPage = pageNumber == ViewBag.Pages ? pageNumber : pageNumber + 1;
+
+            tasksFiltered.Tasks = tasksFiltered.Tasks.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             return View("SearchTaskIndex", tasksFiltered);
         }
 
@@ -112,8 +132,12 @@ namespace Taak.Controllers
         // GET: TaakTaskController/Create
         public ActionResult Create()
         {
-            var taakTaskViewModelCreate = new TaakTaskViewModelCreate(taskCategoryRepository);
-            
+            var taakTaskViewModelCreate = new TaakTaskViewModelCreate(taskCategoryRepository, citiesByCountyRepository);
+            var idUser = HttpContext.Session.GetString("UserId");
+            var idCustomer = customerRepository.GetCustomerId(idUser);
+            taakTaskViewModelCreate.IdCustomer = idCustomer;
+            taakTaskViewModelCreate.Country = "Romania";
+
             return View(taakTaskViewModelCreate);
         }
         [Authorize(Roles ="Customer")]
@@ -129,16 +153,16 @@ namespace Taak.Controllers
                 task.Wait();
                 if (task.Result)
                 {
-                    //here we set the model.IdCustomer and also the model.IdTaaktask
-                    var idUser = HttpContext.Session.GetString("UserId");
-                    var idCustomer = customerRepository.GetCustomerId(idUser);
+                             
                     model.IdTask = Guid.NewGuid();
-                    model.IdCustomer = idCustomer;
+                    model.County = citiesByCountyRepository.GetCountyByCityName(model.City);
                     taakTaskRepository.Insert(model);
                     TempData["succes"] = "task created successfully";
                     return RedirectToAction("IndexByUser");
                 }
-                return View("Create");
+                var taakTaskViewModelCreate = new TaakTaskViewModelCreate(taskCategoryRepository, citiesByCountyRepository);
+                
+                return View("Create", taakTaskViewModelCreate);
             }
             catch
             {

@@ -46,6 +46,8 @@ namespace Taak.Controllers
             double result = offers.Count() / pageSize;
             ViewBag.Pages = offers.Count() % pageSize != 0 ? result+1 : result;
             ViewBag.CurrentPageNo = pageNumber;
+            ViewBag.PrevPage = pageNumber == 1 ? 1 : pageNumber - 1;
+            ViewBag.NextPage = pageNumber == ViewBag.Pages ? pageNumber : pageNumber + 1;
 
             offers = offers.Skip((pageNumber - 1) * pageSize).Take(pageSize);
             foreach(var offer in offers)
@@ -71,11 +73,8 @@ namespace Taak.Controllers
         {
             var idUser = HttpContext.Session.GetString("UserId");
             var idTaskWorker = taskWorkerRepository.GetTaskWorkerByUserId(idUser).IdTaskWorker;
-            var offerModel = new OfferModel();
-            offerModel.IdOffer = Guid.NewGuid();
-            offerModel.IdTask=idTask;
-            offerModel.IdTaskWorker=idTaskWorker;
-
+            var offerModel = new OfferViewModelCreate(idTask, idTaskWorker,taakTaskRepository);
+            
             return View(offerModel);
         }
 
@@ -92,6 +91,18 @@ namespace Taak.Controllers
                 task.Wait();
                 if (task.Result)
                 {
+                    if(!offerRepository.CheckForExistingOffer(model.IdTask, model.IdTaskWorker))
+                    {
+                        RedirectToAction("SearchTaskIndex", "TaakTask");
+                    }
+                    if (model.TaskStartDate==null && model.EstimatedTime==null && model.SpecialRequirements==null && model.Buget == 0)
+                    {
+                        model.IsOriginalOfferAccepted = true;
+                    }
+                    else
+                    {
+                        model.IsOriginalOfferAccepted = false;
+                    }                   
                     offerRepository.Insert(model);
                     return RedirectToAction("IndexByTaskWorker");
                 }

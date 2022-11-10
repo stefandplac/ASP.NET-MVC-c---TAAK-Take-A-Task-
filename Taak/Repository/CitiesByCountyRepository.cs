@@ -11,5 +11,10 @@ namespace Taak.Repository
         {
             _db = db;
         }
+        public string GetCountyByCityName(string city)
+        {
+            string county = base.GetAll().FirstOrDefault(item=>item.City.Equals(city)).County;
+            return county;
+        }
     }
 }

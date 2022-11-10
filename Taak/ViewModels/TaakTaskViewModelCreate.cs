@@ -6,8 +6,9 @@ namespace Taak.ViewModels
 {
     public class TaakTaskViewModelCreate
     {
-        
+
         public List<TaskCategoryModel> TaskCategories { get; set; }
+        public IEnumerable<string> Cities { get; set; }
         public Guid IdTask { get; set; }
         public Guid IdTaskCategory { get; set; }
         public Guid IdCustomer { get; set; }
@@ -23,10 +24,13 @@ namespace Taak.ViewModels
         public string? Floor { get; set; }
         public string County { get; set; } = null!;
         public string Country { get; set; } = null!;
-        public TaakTaskViewModelCreate( TaskCategoryRepository taskCategoryRepository)
+        public TaakTaskViewModelCreate( TaskCategoryRepository taskCategoryRepository,
+                                        CitiesByCountyRepository citiesRepository)
         {
             
             TaskCategories = taskCategoryRepository.GetAll().ToList();
+            Cities = citiesRepository.GetAll().Select(city=>city.City).OrderBy(x=>x);
         }
+        
     }
 }

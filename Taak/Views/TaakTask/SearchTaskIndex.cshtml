@@ -23,6 +23,9 @@
             }
         </select>
     </div>
+    <div hidden>
+        <input id="pageNumberInput" asp-for="PageNumber" />
+    </div>
     <div class="container d-flex w-50 align-items-center justify-content-center ">
             <label for="Budget" class="pe-1">Budget</label>
             <div class="wrapper">
@@ -70,28 +73,18 @@
 @if (Model.Tasks.Count() != 0)
 {
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-
+                
                 <th>
-                    IdTaskCategory
+                    Task
                 </th>
-                <th>
-                    IdCustomer
-                </th>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Description
-                </th>
+                
                 <th>
                     Buget
                 </th>
-                <th>
-                    SpecialRequirements
-                </th>
+                
                 <th>
                     TaskStartDate
                 </th>
@@ -99,23 +92,10 @@
                     TaskEndDate
                 </th>
                 <th>
-                    City
+                    Location
+                
                 </th>
-                <th>
-                    Street
-                </th>
-                <th>
-                    Building
-                </th>
-                <th>
-                    Floor
-                </th>
-                <th>
-                    County
-                </th>
-                <th>
-                    Country
-                </th>
+               
                 <th></th>
             </tr>
         </thead>
@@ -124,24 +104,30 @@
             {
                 <tr>
 
+                   
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdTaskCategory)
+                        <div class="container w-100 d-flex flex-column">
+                            <div class="border-bottom pb-2">
+                                 @Html.DisplayFor(modelItem => item.Title)
+                            </div>
+                            <div class="pb-1">
+                                  @Html.DisplayFor(modelItem => item.Description)
+                            </div>
+                            <div class="text-danger">
+                                 @Html.DisplayFor(modelItem => item.SpecialRequirements)
+                            </div>
+                               
+                               
+                                
+                        </div>
                     </td>
+                   
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdCustomer)
+                        <div class="badge bg-primary text-wrap" style="width: auto;min-width:3rem;">
+                             @item.Buget.ToString("#")
+                        </div>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Buget)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SpecialRequirements)
-                    </td>
+                    
                     <td>
                         @Html.DisplayFor(modelItem => item.TaskStartDate)
                     </td>
@@ -150,26 +136,18 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
+                    
                         @Html.DisplayFor(modelItem => item.Street)
-                    </td>
-                    <td>
+                   
                         @Html.DisplayFor(modelItem => item.Building)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Floor)
-                    </td>
-                    <td>
+                    
                         @Html.DisplayFor(modelItem => item.County)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
+                    
                     <td>
                         @if (User.IsInRole("Worker"))
                         {
-                            <a asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task Offer</a>
+                            <a asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task</a>
                             <a asp-controller="Offer" asp-action="Create" asp-route-idTask="@item.IdTask">Make Offer</a>
                         }
 
@@ -178,6 +156,34 @@
             }
         </tbody>
     </table>
+     <div class="container container-fluid w-100 flex-grow-1 d-flex justify-content-center align-items-end">
+
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination">
+             @if(Model.Tasks.Count()!=0) 
+             {       @if (ViewBag.Pages != 1)
+                    {
+                        <li class="page-item">
+                            <a href="#" class="page-link" onclick="event.preventDefault(); $('#pageNumberInput').val('@ViewBag.PrevPage'); $('#filterTasks').submit();">Previous</a>
+                        </li> 
+                    }
+                @for(var pageNumber=1;pageNumber<=ViewBag.Pages;pageNumber++)
+                {
+                    <li class="page-item">
+                        <a href="" class="page-link"  onclick="event.preventDefault(); $('#pageNumberInput').val('@pageNumber'); $('#filterTasks').submit();"  >@pageNumber</a>
+                    </li>
+                
+                }
+                  @if (ViewBag.Pages != 1)
+                    {
+                     <li class="page-item">
+                            <a href="#" class="page-link" onclick="   event.preventDefault(); $('#pageNumberInput').val('@ViewBag.NextPage'); $('#filterTasks').submit();">Next</a>
+                     </li>  
+                    }
+                }
+          </ul>
+        </nav>
+    </div>
 }
 else
 {
