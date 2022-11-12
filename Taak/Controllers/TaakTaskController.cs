@@ -221,6 +221,9 @@ namespace Taak.Controllers
                
                 
             }
+            //remove all entries from offer table that have as foreign key the deleted IdTask
+            var offers = offerRepository.GetAll().Where(offer => offer.IdTask == id);
+            offerRepository.DeleteRange(offers);
             taakTaskRepository.Delete(id);
             if (User.IsInRole("Customer"))
             {

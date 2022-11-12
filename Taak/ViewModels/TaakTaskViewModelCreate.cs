@@ -1,4 +1,5 @@
-﻿using Taak.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using Taak.Models;
 using Taak.Models.DBObjects;
 using Taak.Repository;
 
@@ -8,7 +9,8 @@ namespace Taak.ViewModels
     {
 
         public List<TaskCategoryModel> TaskCategories { get; set; }
-        public IEnumerable<string> Cities { get; set; }
+        public List<string> Counties { get; set; }
+        public List<string> Cities { get; set; }
         public Guid IdTask { get; set; }
         public Guid IdTaskCategory { get; set; }
         public Guid IdCustomer { get; set; }
@@ -16,6 +18,7 @@ namespace Taak.ViewModels
         public string Description { get; set; } = null!;
         public decimal Buget { get; set; }
         public string? SpecialRequirements { get; set; }
+        
         public DateTime TaskStartDate { get; set; }
         public DateTime? TaskEndDate { get; set; }
         public string City { get; set; } = null!;
@@ -29,7 +32,9 @@ namespace Taak.ViewModels
         {
             
             TaskCategories = taskCategoryRepository.GetAll().ToList();
-            Cities = citiesRepository.GetAll().Select(city=>city.City).OrderBy(x=>x);
+            Counties = citiesRepository.ReturnCounties();
+            Cities = citiesRepository.ReturnCitiesOrdered();
+            TaskStartDate=DateTime.Now;
         }
         
     }

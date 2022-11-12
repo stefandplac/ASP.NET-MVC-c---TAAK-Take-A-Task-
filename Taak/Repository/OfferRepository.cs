@@ -26,5 +26,17 @@ namespace Taak.Repository
             var offersByWorker = base.GetAll().Where(offer => offer.IdTaskWorker == idTaskWorker).ToList();
             return offersByWorker;
         }
+        public void DeleteRange(IEnumerable<OfferModel> offers)
+        {
+            if (offers.Count() > 0)
+            {
+                foreach (var offer in offers)
+                {
+                    base.Delete(offer.IdOffer);
+                    
+                }
+                
+            }
+        }
     }
 }

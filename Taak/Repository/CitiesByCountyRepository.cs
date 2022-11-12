@@ -16,5 +16,33 @@ namespace Taak.Repository
             string county = base.GetAll().FirstOrDefault(item=>item.City.Equals(city)).County;
             return county;
         }
+        public ILookup<string, string> GroupCitiesByCountiesOrderedList()
+        {
+            ILookup<string, string> citiesByCountiesOrderedList = base.GetAll()
+                                                     .OrderBy(item => item.County).ThenBy(item => item.City)
+                                                     .ToLookup(
+                                                                        entryKey => entryKey.County,
+                                                                        entryValue => entryValue.City);
+             return citiesByCountiesOrderedList;                                                          
+        }
+        
+        public List<string> ReturnCitiesOrdered()
+        {
+            List<string> citiesOrdered = base.GetAll()
+                                                        .OrderBy(item => item.City)
+                                                        .Select(x =>  x.City).ToList<string>();
+                                                        
+            
+            return citiesOrdered;
+        }
+        public List<string> ReturnCounties()
+        {
+            List<string> counties = base.GetAll()
+                                        .OrderBy(x=>x.County)
+                                        .Select(x=>x.County).Distinct().ToList<string>();
+
+
+            return counties;
+        }
     }
 }

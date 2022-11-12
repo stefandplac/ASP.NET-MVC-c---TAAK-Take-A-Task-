@@ -22,12 +22,7 @@ namespace Taak.ViewModels
         {
             TaskCategories = taakCategoryRepository.GetAll();
             Tasks = taakTaskRepository.GetAll();
-            CitiesByCounty = citiesByCountyRepository.GetAll()
-                                                     .OrderBy(item=>item.County).ThenBy(item=>item.City)
-                                                     .ToLookup(
-                                                                        entryKey=>entryKey.County,
-                                                                        entryValue=>entryValue.City
-                                                                        );
+            CitiesByCounty = citiesByCountyRepository.GroupCitiesByCountiesOrderedList();
             (decimal, decimal) result = taakTaskRepository.GetMinMax();
             BudgetMin = result.Item1;
             BudgetMax = result.Item2;

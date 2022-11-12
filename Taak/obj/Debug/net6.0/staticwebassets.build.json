@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KEIFbwPhNWvaq1UITrrduEPg8sVyGztI3JGKWHU4erI=",
+  "Hash": "cRFYBEHuqS0z7IbIjqwrUwCIs7RLyj5zfsD+ilDVgzU=",
   "Source": "Taak",
   "BasePath": "_content/Taak",
   "Mode": "Default",
@@ -1122,6 +1122,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\createTaskForm.js",
+      "SourceId": "Taak",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
+      "BasePath": "_content/Taak",
+      "RelativePath": "js/createTaskForm.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\createTaskForm.js"
+    },
+    {
       "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\RangeBar.js",
       "SourceId": "Taak",
       "SourceType": "Discovered",
@@ -1154,23 +1171,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
-    },
-    {
-      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\TaskFilters.js",
-      "SourceId": "Taak",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
-      "BasePath": "_content/Taak",
-      "RelativePath": "js/TaskFilters.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\TaskFilters.js"
     },
     {
       "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
