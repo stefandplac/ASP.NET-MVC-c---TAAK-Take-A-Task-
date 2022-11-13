@@ -103,13 +103,24 @@ namespace Taak.Controllers
 
         //get method -- returns taakTasksByUser
         [Authorize(Roles="Customer")]
-        public ActionResult IndexByUser()
+        public ActionResult IndexByUser(string pageno)
         {
             var idUser = HttpContext.Session.GetString("UserId");
             var idCustomer = customerRepository.GetCustomerId(idUser);
             var taakTasks = taakTaskRepository.GetAll().Where(task => task.IdCustomer == idCustomer);
             ViewBag.TimeFrames = Constants.TimeFrames;
             ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
+
+            //pagination
+            var pageNumber = Int32.TryParse(pageno, out int x) ? x : 1;
+            var pageSize = 5;
+            double result = taakTasks.Count() / pageSize;
+            ViewBag.Pages = taakTasks.Count() % pageSize != 0 ? result + 1 : result;
+            ViewBag.CurrentPageNo = pageNumber;
+            ViewBag.PrevPage = pageNumber == 1 ? 1 : pageNumber - 1;
+            ViewBag.NextPage = pageNumber == ViewBag.Pages ? pageNumber : pageNumber + 1;
+
+            taakTasks = taakTasks.Skip((pageNumber - 1) * pageSize).Take(pageSize);
             return View(taakTasks);
         }
 

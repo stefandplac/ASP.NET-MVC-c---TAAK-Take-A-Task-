@@ -44,10 +44,13 @@
                     </div>
                     <div class="w-25 d-flex flex-column ps-2 " >
                         <div class="w-100  ps-2 text-white" style="background-color:#a2c6ba;">
-                            <i class="bi bi-hourglass-split"></i> @item.DateOption
+                            <i class="bi bi-hourglass-split"></i> @item.DateOption 
                         </div>
-                        <div class="w-100 border-bottom ps-2 text-success">
+                        <div class="taskDate w-100 border-bottom ps-2 text-success" >
                             @item.TaskEndDate.ToString()
+                        </div>
+                        <div class="daysLeft w-100 border-bottom ps-2 text-success" id="daysLeft">
+                            
                         </div>
                         @if (!String.IsNullOrEmpty(@item.TimeOptions))
                         {
@@ -79,8 +82,33 @@
         }
     </div>
 
-    <div class="container w-100 d-flex flex-column" name="paginationContainer">
+    <div class="container container-fluid w-100 flex-grow-1 d-flex justify-content-center align-items-end">
 
+        <nav aria-label="Page navigation example ">
+          <ul class="pagination">
+             @if(Model.Count()!=0)
+             {       @if (ViewBag.Pages != 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@ViewBag.PrevPage" >Previous</a>
+                        </li> 
+                    }
+                @for(var pageNumber=1;pageNumber<=ViewBag.Pages;pageNumber++)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@pageNumber"  >@pageNumber</a>
+                    </li>
+                
+                }
+                  @if (ViewBag.Pages != 1)
+                    {
+                     <li class="page-item">
+                            <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@ViewBag.NextPage" >Next</a>
+                     </li>  
+                    }
+                }
+          </ul>
+        </nav>
     </div>
 </div>
 
@@ -88,6 +116,17 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-          
+$(document).ready(() => {
+    var elements = $('.taskDate');
+    for (var el of elements) {
+        $(el).val(Date.now());
+    }
+    //$('#daysLeft').val('xxxx');
+    //var taskDateChildren = $('.daysLeft');
+    //for (const taskDate of taskDateChildren) {
+    //    //$(taskDate).siblings('.daysLeft').val('xxxx');
+    //    $(taskDate).val('xxxx');
+    //}
+});
     </script>
 }
