@@ -16,15 +16,16 @@ const selectDateOptions = (divParent, divSelected) => {
 }
 
 const selectTimeOption = (divSelected) => {
-    var isSelect = $(divSelected).data('selected');
+    var el = $(divSelected);
+    var isSelect = el.data('selected');
     if (isSelect == "notSelected") {
-        $(divSelected).attr('style', 'color:white; background-color:#008fb4;');
-        $(divSelected).data('selected', "isSelected");
+       el.attr('style', 'color:white; background-color:#008fb4;');
+       el.data('selected', "isSelected");
 
     }
     else if (isSelect == "isSelected") {
-        $(divSelected).attr('style',"");
-        $(divSelected).data('selected', "notSelected");
+        el.attr('style',"");
+        el.data('selected', "notSelected");
     }
     var timeOptionsResult ="";
     
@@ -34,7 +35,7 @@ const selectTimeOption = (divSelected) => {
         //console.log($(el).parent().data('selected'));
         var parentIsSelected = $(el).parent().data('selected');
         if (parentIsSelected == "isSelected") {
-            timeOptionsResult += $(el).text().trim() + ' ,';
+            timeOptionsResult +=$(el).text().trim()+',';
         }
         
     }

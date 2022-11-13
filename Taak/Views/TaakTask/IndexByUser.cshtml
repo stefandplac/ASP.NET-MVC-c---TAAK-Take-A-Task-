@@ -3,105 +3,91 @@
 @{
     ViewData["Title"] = "IndexByUser";
     Layout = "_CustomerCMSLayout";
+    
 }
+<div class="container w-100 h-100 d-flex flex-column p-4 ">
+    <div class="container w-100 d-flex flex-column " name="taskDisplayContainer">
+        @foreach(var item in Model){
+            <div class=" container w-100 d-flex flex-column pt-4 pb-4 pe-4 mb-3 bg-light " onmouseover=" $(this).children('#btnAction').show();" onmouseout="    $(this).children('#btnAction').hide();">
+                <div name="taskHeader" class="w-100 d-flex ">
+                    <div class="w-50 d-flex flex-column gap-1">
+                        <div class="w-100 text-primary text-capitalize">
+                            @item.Title
+                        </div>
+                        <div class="w-100 text-body">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>@item.City, @item.County</span>
+                        </div>
+                        <div class="w-100 text-muted">
+                            <i class="bi bi-calendar-event"></i>
+                             @item.TaskStartDate.ToString("dddd, dd MMMM yyyy")
+                            
+                        </div>
+                        <div class="w-100 text-secondary ">
+                            @item.Description
+                        </div>
+                        @if (!String.IsNullOrEmpty(item.SpecialRequirements))
+                        {
+                            <div class="w-100 text-danger">
+                                <i class="bi bi-bell"></i>  @item.SpecialRequirements
 
-<h1>IndexByUser</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Buget)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SpecialRequirements)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskEndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Street)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Building)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Floor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.County)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Buget)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpecialRequirements)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Building)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Floor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.County)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                <a asp-controller="Offer" asp-action="IndexByTask" asp-route-id="">Show Offers</a>
-                <a asp-controller="TaakTask" asp-action="Details" asp-route-id="@item.IdTask">Details</a>
-                <a asp-controller="TaakTask" asp-action="Edit" asp-route-id="@item.IdTask">Edit</a>
-                <a asp-controller="TaakTask" asp-action="Delete" asp-route-id="@item.IdTask">Delete</a>
-           
+                            </div>
+                        }
 
-            </td>
-        </tr>
+                    </div>
+                    <div class="w-25 d-flex flex-column text-center ">
+                        
+                        <span>@item.Buget.ToString("#")</span>
+                        <span style="font-size:12px;">RON</span>
+                       
+                    </div>
+                    <div class="w-25 d-flex flex-column ps-2 " >
+                        <div class="w-100  ps-2 text-white" style="background-color:#a2c6ba;">
+                            <i class="bi bi-hourglass-split"></i> @item.DateOption
+                        </div>
+                        <div class="w-100 border-bottom ps-2 text-success">
+                            @item.TaskEndDate.ToString()
+                        </div>
+                        @if (!String.IsNullOrEmpty(@item.TimeOptions))
+                        {
+                            var timeFrames = @item.TimeOptions.Replace(" ", "").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                            <div class="w-100 ps-2 text-white" style="background-color:#8ac6d5;">
+                                <i class="bi bi-clock-history"></i> Time Frame
+                            </div>
+                            @foreach(var time in timeFrames)
+                            {
+                                <div class="w-100 border-top-0 ps-2 text-muted" style="border-color:8ac6d5;">
+                                      @Html.Raw(@ViewBag.TimeFramesIcons[@time]) @time: @ViewBag.TimeFrames[@time] 
+                                </div>
+                            }
+                            
+                        }
+                        
+                    </div>
+                    <div class="bg-danger" w-100 border" id="testv2"></div>
+                    
+                </div>
+                <div style="display:none;"  id="btnAction">
+                    <div class="w-100 d-flex justify-content-end gap-2 pt-2" id="btnAction" >
+                        <a class="btn  text-white" style="background-color:#92a8ad" asp-controller="" asp-action="">Edit</a>
+                        <a class="btn  bg-danger bg-opacity-75 text-white"  asp-controller="" asp-action="">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="container w-100 d-flex flex-column" name="paginationContainer">
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+          
+    </script>
 }
-    </tbody>
-</table>

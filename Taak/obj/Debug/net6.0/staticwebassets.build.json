@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cRFYBEHuqS0z7IbIjqwrUwCIs7RLyj5zfsD+ilDVgzU=",
+  "Hash": "T9XpPmTQaSDPrObUB4YM7UgzRLquizzjHWCaYl/G30c=",
   "Source": "Taak",
   "BasePath": "_content/Taak",
   "Mode": "Default",
@@ -1120,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\createOfferForm.js",
+      "SourceId": "Taak",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
+      "BasePath": "_content/Taak",
+      "RelativePath": "js/createOfferForm.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\createOfferForm.js"
     },
     {
       "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\createTaskForm.js",

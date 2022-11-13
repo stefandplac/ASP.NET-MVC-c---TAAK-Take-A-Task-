@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Taak.Data;
+using Taak.Libraries.Constants;
 using Taak.Libraries.SearchFilters;
 using Taak.Models;
 using Taak.Repository;
@@ -107,7 +108,8 @@ namespace Taak.Controllers
             var idUser = HttpContext.Session.GetString("UserId");
             var idCustomer = customerRepository.GetCustomerId(idUser);
             var taakTasks = taakTaskRepository.GetAll().Where(task => task.IdCustomer == idCustomer);
-            
+            ViewBag.TimeFrames = Constants.TimeFrames;
+            ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
             return View(taakTasks);
         }
 
