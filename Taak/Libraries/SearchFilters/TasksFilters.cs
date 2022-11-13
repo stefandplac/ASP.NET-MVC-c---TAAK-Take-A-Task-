@@ -17,6 +17,7 @@ namespace Taak.Libraries.SearchFilters
             if (location.Contains("#"))
             {
                 //the county name contains  # in the city post value to be identified as county
+                location = location.Trim(new char[] {'#'});
                 tasks = tasks.Where(taakTask => taakTask.County == location).ToList();
             }
             tasks = tasks.Where(taakTask => taakTask.City == location).ToList();

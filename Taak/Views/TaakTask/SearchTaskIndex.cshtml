@@ -40,8 +40,8 @@
                     </div>
                     <div class="containerRange">
                         <div class="sliderTrackRange"></div>
-                        <input asp-for="SearchBudgetMin" class="inputRange" type="range" min="@Model.BudgetMin" max="@Model.BudgetMax" value="@Model.SearchBudgetMin" id="slider-1" oninput="slideOne()" onchange="$('#filterTasks').submit()">
-                        <input asp-for="SearchBudgetMax" class="inputRange" type="range" min="@Model.BudgetMin" max="@Model.BudgetMax" value="@Model.SearchBudgetMax" id="slider-2" oninput="slideTwo()" onchange="$('#filterTasks').submit()">
+                        <input asp-for="SearchBudgetMin" class="inputRange" type="range" min="@Model.BudgetMin.ToString("#")" max="@Model.BudgetMax.ToString("#")" value="@Model.SearchBudgetMin.ToString("#")" id="slider-1" oninput="slideOne()" onchange="$('#filterTasks').submit()">
+                        <input asp-for="SearchBudgetMax" class="inputRange" type="range" min="@Model.BudgetMin.ToString("#")" max="@Model.BudgetMax.ToString("#")" value="@Model.SearchBudgetMax.ToString("#")" id="slider-2" oninput="slideTwo()" onchange="$('#filterTasks').submit()">
                     </div>
             </div>
     </div>

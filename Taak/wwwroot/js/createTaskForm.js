@@ -1,26 +1,45 @@
-﻿const selectDateOptions = (divParent, divSelected) => {
+﻿$(document).ready(() => {
+    $('#dateOptionInput').val($('#dateOptionDefault').text());    
+});
+
+const setCounty = (input) => {
+    
+}
+
+
+const selectDateOptions = (divParent, divSelected) => {
     $(divParent).children().attr('style', '');
     $(divSelected).attr('style', 'color:white; background-color:#008fb4;');
+    $('#dateOptionInput').val($(divSelected).first().text().trim());
     
     
 }
 
 const selectTimeOption = (divSelected) => {
     var isSelect = $(divSelected).data('selected');
-    //console.log(isSelect);
-    //console.log(isSelect == "notSelected");
     if (isSelect == "notSelected") {
         $(divSelected).attr('style', 'color:white; background-color:#008fb4;');
-        $(divSelected).data('selected', 'isSelected');
-        return;
+        $(divSelected).data('selected', "isSelected");
+
     }
     else if (isSelect == "isSelected") {
-        $(divSelected).attr('style', '');
-        $(divSelected).data('selected', 'notSelected');
-        return;
-
+        $(divSelected).attr('style',"");
+        $(divSelected).data('selected', "notSelected");
     }
-
+    var timeOptionsResult ="";
+    
+    var elements = $('.timeOptionChild');
+    for (const el of elements) {
+        //console.log($(el).parent());
+        //console.log($(el).parent().data('selected'));
+        var parentIsSelected = $(el).parent().data('selected');
+        if (parentIsSelected == "isSelected") {
+            timeOptionsResult += $(el).text().trim() + ' ,';
+        }
+        
+    }
+    //console.log(timeOptionsResult);
+    $('#timeOptionsInput').val(timeOptionsResult);
 }
 
 const activateDateOptions = (input) => {
@@ -35,7 +54,9 @@ const activateDateOptions = (input) => {
     $('#dateOptions').show(600);
     const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
     var date = new Date(input.value);
+    $('#taskEndDate').val(date.toISOString());    
     $('.spanDate').text(date.toLocaleDateString('en-us', options));
+
     
 }
 

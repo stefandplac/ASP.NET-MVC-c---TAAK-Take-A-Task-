@@ -192,7 +192,7 @@ namespace Taak.Data
             modelBuilder.Entity<Offer>(entity =>
             {
                 entity.HasKey(e => e.IdOffer)
-                    .HasName("PK__Offers__333FAA4904841619");
+                    .HasName("PK__Offers__333FAA49F723D061");
 
                 entity.Property(e => e.IdOffer).ValueGeneratedNever();
 
@@ -224,7 +224,7 @@ namespace Taak.Data
             modelBuilder.Entity<TaakTask>(entity =>
             {
                 entity.HasKey(e => e.IdTask)
-                    .HasName("PK__TaakTask__9FCAD1C5515349C5");
+                    .HasName("PK__TaakTask__9FCAD1C50AD3B8D7");
 
                 entity.Property(e => e.IdTask).ValueGeneratedNever();
 
@@ -243,6 +243,10 @@ namespace Taak.Data
                     .IsUnicode(false);
 
                 entity.Property(e => e.County)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateOption)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -265,6 +269,10 @@ namespace Taak.Data
                 entity.Property(e => e.TaskEndDate).HasColumnType("datetime");
 
                 entity.Property(e => e.TaskStartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.TimeOptions)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(100)
