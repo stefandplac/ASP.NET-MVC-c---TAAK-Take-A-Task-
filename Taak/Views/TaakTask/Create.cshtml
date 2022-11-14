@@ -125,16 +125,16 @@
                     <div style="display:none;" id="dateOptions" name="dateOptions">
                     <div class="w-100 d-flex pb-2 gap-1 text-center" id="dateOptionsParent">
                         <div class="form-control"  onclick="selectDateOptions($('#dateOptionsParent'),this)" data-selected="isSelected" style="color:white; background-color:#008fb4;" >
-                                      <span id="dateOptionDefault">On Date</span> <br/> 
+                                      <span class="dateOption" id="dateOptionDefault">On Date</span> <br/> 
                                       <span class="spanDate" style="font-size:14px;"></span>
                         </div>
                         <div class="form-control" onclick="selectDateOptions($('#dateOptionsParent'),this)" data-selected="notSelected">
-                                        <span>Before Date</span><br/> 
+                                        <span class="dateOption">Before Date</span><br/> 
                                        <span class="spanDate" style="font-size:14px;"></span>
                         </div>
                         <div class="form-control" onclick="selectDateOptions($('#dateOptionsParent'),this)" data-selected="notSelected">
-                                        <span>Flexible</span><br/> 
-                                       <span class="" style="font-size:14px;">Up to 2 weeks</span>
+                                        <span class="dateOption">Flexible</span><br/> 
+                                       <span class="" style="font-size:14px;">up to 2 weeks before - after</span>
                         </div>
                     </div>                    
                     <div class="w-100 d-flex pb-2">
@@ -220,10 +220,10 @@
                         <input asp-for="IdCustomer"/>
                         <input asp-for="IdTask"/>
                         <input asp-for="Country" id="country"/>  
-                        <input asp-for="TaskStartDate"/>
-                        <input type="datetime" class="form-control" asp-for="TaskEndDate" id="taskEndDate" min="@ViewBag.CurrentDate2" />
-                        <input asp-for="DateOption" id="dateOptionInput" />
-                        <input asp-for="TimeOptions" id="timeOptionsInput"/>
+                        <input asp-for="PostedDate"/>
+                        <input type="datetime" class="form-control" asp-for="TaskDate" id="taskEndDate" min="@ViewBag.CurrentDate2" />
+                        <input class="w-100" asp-for="DateOption" id="dateOptionInput" />
+                        <input class="w-100" asp-for="TimeOptions" id="timeOptionsInput"/>
                         
                  </div>
                 <input type="submit" value="Create" class="btn btn-primary" style="background-color:#92a8ad;border:2px solid white;" />
@@ -233,7 +233,7 @@
 </div>
 @section Scripts {
    
-
+     <script type="text/javascript" src="~/js/createTaskFormReady.js"></script>
    <script type="text/javascript" src="~/js/createTaskForm.js"></script>
    
 

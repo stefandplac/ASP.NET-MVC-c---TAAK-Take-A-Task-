@@ -3,115 +3,130 @@
 @{
     ViewData["Title"] = "IndexByUser";
     Layout = "_CustomerCMSLayout";
-    
+
 }
-<div class="container w-100 h-100 d-flex flex-column p-4 ">
-    <div class="container w-100 d-flex flex-column " name="taskDisplayContainer">
-        @foreach(var item in Model){
-            <div class=" container w-100 d-flex flex-column pt-4 pb-4 pe-4 mb-3 bg-light " onmouseover=" $(this).children('#btnAction').show();" onmouseout="    $(this).children('#btnAction').hide();">
-                <div name="taskHeader" class="w-100 d-flex ">
-                    <div class="w-50 d-flex flex-column gap-1">
-                        <div class="w-100 text-primary text-capitalize">
-                            @item.Title
-                        </div>
-                        <div class="w-100 text-body">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>@item.City, @item.County</span>
-                        </div>
-                        <div class="w-100 text-muted">
-                            <i class="bi bi-calendar-event"></i>
-                             @item.TaskStartDate.ToString("dddd, dd MMMM yyyy")
-                            
-                        </div>
-                        <div class="w-100 text-secondary ">
-                            @item.Description
-                        </div>
-                        @if (!String.IsNullOrEmpty(item.SpecialRequirements))
-                        {
-                            <div class="w-100 text-danger">
-                                <i class="bi bi-bell"></i>  @item.SpecialRequirements
-
+@if (Model.Count() != 0)
+{
+    <div class="container w-100 h-100 d-flex flex-column p-4 ">
+        <div class="container w-100 d-flex flex-column " name="taskDisplayContainer">
+            @foreach (var item in Model)
+            {
+                <div class=" container w-100 d-flex flex-column pt-4 pb-4 pe-4 mb-3 bg-light "  onmouseover=" $(this).children('#btnAction').show();" onmouseout="    $(this).children('#btnAction').hide();">
+                    <div name="taskHeader" class="w-100 d-flex ">
+                        <div class="w-50 d-flex flex-column gap-1">
+                            <div class="w-100 text-primary text-capitalize">
+                                @item.Title
+                            </div>
+                            <div class="w-100 text-body">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>@item.City, @item.County</span>
+                            </div>
+                            <div class="w-100 text-muted">
+                                <i class="bi bi-calendar-event"></i>
+                                @item.PostedDate.ToString("dddd, dd MMMM yyyy")
 
                             </div>
-                        }
-
-                    </div>
-                    <div class="w-25 d-flex flex-column text-center ">
-                        
-                        <span>@item.Buget.ToString("#")</span>
-                        <span style="font-size:12px;">RON</span>
-                       
-                    </div>
-                    <div class="w-25 d-flex flex-column ps-2 " >
-                        <div class="w-100  ps-2 text-white" style="background-color:#a2c6ba;">
-                            <i class="bi bi-hourglass-split"></i> @item.DateOption 
-                        </div>
-                        <div class="taskDate w-100 border-bottom ps-2 text-success" >
-                            @item.TaskEndDate.ToString()
-                        </div>
-                        <div class="daysLeft w-100 border-bottom ps-2 text-success" id="daysLeft">
-                            
-                        </div>
-                        @if (!String.IsNullOrEmpty(@item.TimeOptions))
-                        {
-                            var timeFrames = @item.TimeOptions.Replace(" ", "").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-                            <div class="w-100 ps-2 text-white" style="background-color:#8ac6d5;">
-                                <i class="bi bi-clock-history"></i> Time Frame
+                            <div class="w-100  bg-white rounded " >
+                                @item.Description
                             </div>
-                            @foreach(var time in timeFrames)
+                            @if (!String.IsNullOrEmpty(item.SpecialRequirements))
                             {
-                                <div class="w-100 border-top-0 ps-2 text-muted" style="border-color:8ac6d5;">
-                                      @Html.Raw(@ViewBag.TimeFramesIcons[@time]) @time: @ViewBag.TimeFrames[@time] 
+                                <div class="w-100 text-danger">
+                                    <i class="bi bi-bell"></i>  @item.SpecialRequirements
+
+
                                 </div>
                             }
-                            
+
+                        </div>
+                        <div class="w-25 d-flex flex-column text-center ">
+
+                            <span>@item.Buget.ToString("#")</span>
+                            <span style="font-size:12px;">RON</span>
+
+                        </div>
+                        <div class="w-25 d-flex flex-column ps-2 " >
+                            <div class="w-100  ps-2 text-white bg-success bg-opacity-75" style="background-color:#a2c6ba;">
+                                <i class="bi bi-hourglass-split"></i> @item.DateOption 
+                            </div>
+                            @if (item.DateOption.Trim() == "Flexible")
+                            {
+                                <div class="taskDate w-100  ps-2 text-success" >
+                                    <i class="bi bi-caret-right-fill"></i> week: before - after
+                                </div>
+                            }
+                            <div class="taskDate w-100 border-bottom ps-2 text-success" >
+                                @item.TaskDate.ToString("dd MMMM yyyy")
+                            </div>
+                            <div class="daysLeft w-100 border-bottom ps-2 text-success" id="daysLeft">
+
+                            </div>
+                            @if (!String.IsNullOrEmpty(@item.TimeOptions))
+                            {
+                                var timeFrames = @item.TimeOptions.Replace(" ", "").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                                <div class="w-100 ps-2 text-white " style="background-color:#008fb4;">
+                                    <i class="bi bi-clock-history"></i> Time Frame
+                                </div>
+                                @foreach (var time in timeFrames)
+                                {
+                                    <div class="w-100 border-top-0  ps-2 text-muted" style="border-color:8ac6d5;">
+                                        @Html.Raw(@ViewBag.TimeFramesIcons[@time]) @time: @ViewBag.TimeFrames[@time] 
+                                    </div>
+                                }
+
+                            }
+
+                        </div>
+                        <div class="bg-danger" w-100 border" id="testv2"></div>
+
+                    </div>
+                    <div style="display:none;"  id="btnAction">
+                        <div class="w-100 d-flex justify-content-end gap-2 pt-2" id="btnAction" >
+                            <a class="btn  text-white" style="background-color:#92a8ad" asp-controller="TaakTask" asp-action="Edit" asp-route-id="@item.IdTask">Edit</a>
+                            <a class="btn  bg-danger bg-opacity-75 text-white"  asp-controller="TaakTask" asp-action="Delete" asp-route-id="@item.IdTask">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="container container-fluid w-100 flex-grow-1 d-flex justify-content-center align-items-end">
+
+            <nav aria-label="Page navigation example ">
+                <ul class="pagination">
+                    @if (Model.Count() != 0)
+                    {
+                        @if (ViewBag.Pages != 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@ViewBag.PrevPage" >Previous</a>
+                            </li>
                         }
-                        
-                    </div>
-                    <div class="bg-danger" w-100 border" id="testv2"></div>
-                    
-                </div>
-                <div style="display:none;"  id="btnAction">
-                    <div class="w-100 d-flex justify-content-end gap-2 pt-2" id="btnAction" >
-                        <a class="btn  text-white" style="background-color:#92a8ad" asp-controller="" asp-action="">Edit</a>
-                        <a class="btn  bg-danger bg-opacity-75 text-white"  asp-controller="" asp-action="">Delete</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-
-    <div class="container container-fluid w-100 flex-grow-1 d-flex justify-content-center align-items-end">
-
-        <nav aria-label="Page navigation example ">
-          <ul class="pagination">
-             @if(Model.Count()!=0)
-             {       @if (ViewBag.Pages != 1)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@ViewBag.PrevPage" >Previous</a>
-                        </li> 
+                        @for (var pageNumber = 1; pageNumber <= ViewBag.Pages; pageNumber++)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@pageNumber"  >@pageNumber</a>
+                            </li>
+                        }
+                        @if (ViewBag.Pages != 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@ViewBag.NextPage" >Next</a>
+                            </li>
+                        }
                     }
-                @for(var pageNumber=1;pageNumber<=ViewBag.Pages;pageNumber++)
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@pageNumber"  >@pageNumber</a>
-                    </li>
-                
-                }
-                  @if (ViewBag.Pages != 1)
-                    {
-                     <li class="page-item">
-                            <a class="page-link" asp-controller="TaakTask" asp-action="IndexByUser" asp-route-pageno="@ViewBag.NextPage" >Next</a>
-                     </li>  
-                    }
-                }
-          </ul>
-        </nav>
+                </ul>
+            </nav>
+        </div>
     </div>
-</div>
-
+}
+else
+{
+    <div>
+        You have not posted any tasks yet
+    </div>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -121,12 +136,7 @@ $(document).ready(() => {
     for (var el of elements) {
         $(el).val(Date.now());
     }
-    //$('#daysLeft').val('xxxx');
-    //var taskDateChildren = $('.daysLeft');
-    //for (const taskDate of taskDateChildren) {
-    //    //$(taskDate).siblings('.daysLeft').val('xxxx');
-    //    $(taskDate).val('xxxx');
-    //}
+   
 });
     </script>
 }

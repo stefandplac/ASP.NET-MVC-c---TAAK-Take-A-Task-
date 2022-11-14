@@ -1,9 +1,16 @@
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Identity.Client.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.VisualBasic.resources.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.genruntimeconfig.cache
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.csproj.AssemblyReference.cache
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.AssemblyInfoInputs.cache
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.AssemblyInfo.cs
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.csproj.CoreCompileInputs.cache
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.RazorAssemblyInfo.cache
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.RazorAssemblyInfo.cs
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\appsettings.json
@@ -26,6 +33,7 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterf
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Build.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Build.Framework.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.AnalyzerUtilities.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Features.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll
@@ -33,7 +41,6 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.CS
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.Features.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.Scripting.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.VisualBasic.Features.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.CodeAnalysis.Workspaces.dll
@@ -43,6 +50,7 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.DiaSymReader.dl
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.DotNet.Scaffolding.Shared.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
@@ -50,6 +58,7 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Extensions.Depe
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.Identity.Client.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
@@ -182,7 +191,7 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.VisualBasic.resources.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.VisualBasic.resources.dll
@@ -196,7 +205,6 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\es\Microsoft.CodeAnalysis
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.VisualBasic.Features.resources.dll
@@ -242,9 +250,9 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
@@ -253,13 +261,6 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win\lib\net6.0\S
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.csproj.AssemblyReference.cache
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.AssemblyInfoInputs.cache
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.AssemblyInfo.cs
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.csproj.CoreCompileInputs.cache
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.RazorAssemblyInfo.cache
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
@@ -269,5 +270,4 @@ C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.csproj.CopyComplete
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\refint\Taak.dll
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.pdb
-C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\Taak.genruntimeconfig.cache
 C:\Users\dumea\Desktop\TAAK\taak\Taak\obj\Debug\net6.0\ref\Taak.dll

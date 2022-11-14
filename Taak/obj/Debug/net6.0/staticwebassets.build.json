@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "T9XpPmTQaSDPrObUB4YM7UgzRLquizzjHWCaYl/G30c=",
+  "Hash": "KzgvUVDN1aWy9ZZ65416D9X+dzt6rxeEa+y27nRddlo=",
   "Source": "Taak",
   "BasePath": "_content/Taak",
   "Mode": "Default",
@@ -1154,6 +1154,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\createTaskForm.js"
+    },
+    {
+      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\createTaskFormReady.js",
+      "SourceId": "Taak",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
+      "BasePath": "_content/Taak",
+      "RelativePath": "js/createTaskFormReady.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\createTaskFormReady.js"
+    },
+    {
+      "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\editTaskForm.js",
+      "SourceId": "Taak",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\",
+      "BasePath": "_content/Taak",
+      "RelativePath": "js/editTaskForm.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\editTaskForm.js"
     },
     {
       "Identity": "C:\\Users\\dumea\\Desktop\\TAAK\\taak\\Taak\\wwwroot\\js\\RangeBar.js",

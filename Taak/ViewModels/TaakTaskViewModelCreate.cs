@@ -18,9 +18,9 @@ namespace Taak.ViewModels
         public string Description { get; set; } = null!;
         public decimal Buget { get; set; }
         public string? SpecialRequirements { get; set; }
-        
-        public DateTime TaskStartDate { get; set; }
-        public DateTime TaskEndDate { get; set; }
+
+        public DateTime PostedDate { get; set; }
+        public DateTime TaskDate { get; set; }
         public string? TimeOptions { get; set; }
         public string DateOption { get; set; } = null!;
         public string City { get; set; } = null!;
@@ -36,7 +36,7 @@ namespace Taak.ViewModels
             TaskCategories = taskCategoryRepository.GetAll().ToList();
             Counties = citiesRepository.ReturnCounties();
             Cities = citiesRepository.ReturnCitiesOrdered();
-            TaskStartDate=DateTime.Now;
+            PostedDate=DateTime.Now;
         }
         
     }

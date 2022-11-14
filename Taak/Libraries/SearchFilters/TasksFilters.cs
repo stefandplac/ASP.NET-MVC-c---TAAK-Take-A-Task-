@@ -30,6 +30,11 @@ namespace Taak.Libraries.SearchFilters
             tasks = tasks.Where(task=> task.Buget>=budgetMin && task.Buget<=budgetMax).ToList();
             return tasks;
         }
+        public static IEnumerable<TaakTaskModel> SortByMostRecent(IEnumerable<TaakTaskModel> tasks)
+        {
+            tasks = tasks.OrderByDescending(task=>task.PostedDate);
+            return tasks;
+        }
 
         public static List<TaakTaskModel> FilterByCategoryByCityByBudget(List<TaakTaskModel> tasks,
                                                                          string cat, 

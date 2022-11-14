@@ -1,16 +1,9 @@
-﻿$(document).ready(() => {
-    $('#dateOptionInput').val($('#dateOptionDefault').text());    
-});
-
-const setCounty = (input) => {
-    
-}
-
+﻿
 
 const selectDateOptions = (divParent, divSelected) => {
     $(divParent).children().attr('style', '');
     $(divSelected).attr('style', 'color:white; background-color:#008fb4;');
-    $('#dateOptionInput').val($(divSelected).first().text().trim());
+    $('#dateOptionInput').val($(divSelected).children('.dateOption').text().trim() );
     
     
 }
@@ -74,7 +67,8 @@ const activateTimeOptions = (checkbox) => {
         $('.spanDate').removeAttr('required');
         //when unchecked I want that all inserted data to be deleted and also restore default settings
         $('#timeOptionsParent').children().attr('style', '');
-        $('#timeOptionsParent').children().data('selected','notSelected');
+        $('#timeOptionsParent').children().data('selected', 'notSelected');
+        $('#timeOptionsInput').val('');
     }
 }
 

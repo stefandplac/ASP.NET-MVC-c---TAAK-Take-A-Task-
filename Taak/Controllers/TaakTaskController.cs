@@ -108,6 +108,7 @@ namespace Taak.Controllers
             var idUser = HttpContext.Session.GetString("UserId");
             var idCustomer = customerRepository.GetCustomerId(idUser);
             var taakTasks = taakTaskRepository.GetAll().Where(task => task.IdCustomer == idCustomer);
+            taakTasks = TasksFilters.SortByMostRecent(taakTasks);
             ViewBag.TimeFrames = Constants.TimeFrames;
             ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
 
@@ -121,6 +122,7 @@ namespace Taak.Controllers
             ViewBag.NextPage = pageNumber == ViewBag.Pages ? pageNumber : pageNumber + 1;
 
             taakTasks = taakTasks.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            
             return View(taakTasks);
         }
 
@@ -168,7 +170,6 @@ namespace Taak.Controllers
                 {
                              
                     model.IdTask = Guid.NewGuid();
-                    model.County = citiesByCountyRepository.GetCountyByCityName(model.City);
                     taakTaskRepository.Insert(model);
                     TempData["succes"] = "task created successfully";
                     return RedirectToAction("IndexByUser");
@@ -192,8 +193,9 @@ namespace Taak.Controllers
                 return RedirectToAction("Index");
             }
             var taakTask = taakTaskRepository.GetById(id);
+            var taskToEdit= new TaakTaskViewModelEdit(taskCategoryRepository,citiesByCountyRepository,taakTask);
             
-            return View(taakTask);
+            return View(taskToEdit);
         }
 
         // POST: TaakTaskController/Edit/5
@@ -210,7 +212,7 @@ namespace Taak.Controllers
                 if (task.Result)
                 {
                     taakTaskRepository.Update(model,model.IdTask);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexByUser");
                 }
                 return View("Edit");
             }

@@ -43,6 +43,7 @@ namespace Taak.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             //modelBuilder.Entity<AspNetRole>(entity =>
             //{
             //    entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
@@ -192,7 +193,7 @@ namespace Taak.Data
             modelBuilder.Entity<Offer>(entity =>
             {
                 entity.HasKey(e => e.IdOffer)
-                    .HasName("PK__Offers__333FAA49F723D061");
+                    .HasName("PK__Offers__333FAA497D1DFC41");
 
                 entity.Property(e => e.IdOffer).ValueGeneratedNever();
 
@@ -224,7 +225,7 @@ namespace Taak.Data
             modelBuilder.Entity<TaakTask>(entity =>
             {
                 entity.HasKey(e => e.IdTask)
-                    .HasName("PK__TaakTask__9FCAD1C50AD3B8D7");
+                    .HasName("PK__TaakTask__9FCAD1C5CF783CF2");
 
                 entity.Property(e => e.IdTask).ValueGeneratedNever();
 
@@ -258,6 +259,8 @@ namespace Taak.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.PostedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.SpecialRequirements)
                     .HasMaxLength(1000)
                     .IsUnicode(false);
@@ -266,9 +269,7 @@ namespace Taak.Data
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TaskEndDate).HasColumnType("datetime");
-
-                entity.Property(e => e.TaskStartDate).HasColumnType("datetime");
+                entity.Property(e => e.TaskDate).HasColumnType("datetime");
 
                 entity.Property(e => e.TimeOptions)
                     .HasMaxLength(100)
