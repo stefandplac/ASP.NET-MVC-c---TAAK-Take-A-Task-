@@ -210,5 +210,13 @@ namespace Taak.Controllers
             offerRepository.Update(offerAccepted, idOffer);
             return RedirectToAction("TaskWithAllOffers", "TaakTask", new {idTask=idTask});
         }
+        public ActionResult CancelAcceptedOffer(Guid idOffer)
+        {
+            var offerAccepted = offerRepository.GetById(idOffer);
+            var idTask=offerAccepted.IdTask;
+            offerAccepted.IsAccepted = false;
+            offerRepository.Update(offerAccepted,idOffer);
+            return RedirectToAction("TaskWithAllOffers", "TaakTask", new { idTask = idTask });
+        }
     }
 }

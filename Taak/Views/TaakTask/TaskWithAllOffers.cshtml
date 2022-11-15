@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "TaskWithAllOffers";
     Layout = "_CustomerCMSLayout";
-    var date = @Model.TaskDate;
+    ViewBag.TaskDate = @Model.TaskDate;
+    ViewBag.Buget = @Model.Buget;
+    var idAcceptedOffer = @Model.AcceptedOffer == null ? "" : @Model.AcceptedOffer.IdOffer.ToString();
+    
 }
 <div class="container w-100 d-flex flex-column">
     <div class=" container w-100 d-flex flex-column pt-4 pb-4 pe-4 mb-3 bg-light "  onmouseover=" $(this).children('#btnAction').show();" onmouseout="    $(this).children('#btnAction').hide();">
@@ -66,7 +69,7 @@
                                 </div>
                                 @foreach (var time in timeFrames)
                                 {
-                                    <div class="w-100 border-top-0  ps-2 text-muted" style="border-color:8ac6d5;">
+                                    <div class="w-100 border-top-0  ps-2 text-muted" style="border-color:#8ac6d5;">
                                         @Html.Raw(@ViewBag.TimeFramesIcons[@time]) @time: @ViewBag.TimeFrames[@time] 
                                     </div>
                                 }
@@ -84,12 +87,16 @@
                     </div>
                     
      </div>
-     <div name="offersList" class="container w-100 d-flex flex-column pt-4">
+    @if (Model.AcceptedOffer != null)
+    {
+        <partial name="_DisplayAcceptedOffer" model="@Model.AcceptedOffer"/>
+    }
+    <div name="offersList" class="container w-100 d-flex flex-column pt-4">
         @foreach(var item in @Model.Offers)
         {
             var originalAccepted = (bool)@item.IsOriginalOfferAccepted;
             
-
+            if(!@idAcceptedOffer.Equals(@item.IdOffer.ToString())){
             if (originalAccepted)
             {
                 <div class="d-flex w-75 pb-2">
@@ -121,19 +128,30 @@
                             <div class="text-info">Custom Offer</div>
                         </div>
                         <div class="w-100 text-muted"><i class="bi bi-phone-flip"></i> @item.Phone</div>
-                       <div class="w-100 text-muted"><i class="bi bi-exclamation-octagon"></i> @item.SpecialRequirements</div>
+                       @if(item.SpecialRequirements!=null){
+                           <div class="w-100 text-muted"><i class="bi bi-exclamation-octagon"></i> @item.SpecialRequirements</div>
+                       }
+                       else{
+                           <div class="w-100 text-muted"><i class="bi bi-exclamation-octagon"></i> - no special requirments</div>
                       
+                       }
 
                     </div>
                     <div class="w-25 d-flex flex-column gap-2  p-1  mb-2  me-4" style="min-height:30px;">
                         @if (@item.Buget != null)
                         {
                              <div class="text-info  p-1  border rounded bg-light"><i class="bi bi-piggy-bank-fill"></i> @item.Buget.ToString("#") RON</div>
+                        }else{
+                            <div class="text-muted  p-1  border rounded bg-light"><i class="bi bi-piggy-bank-fill"></i> @Model.Buget.ToString("#") RON</div>
+                    
                         }
                         
                         @if (@item.TaskStartDate != null)
                         {
-                             <div class="text-info  p-1  border rounded bg-light"><i class="bi bi-calendar-week"></i> @date</div>
+                             <div class="text-info  p-1  border rounded bg-light"><i class="bi bi-calendar-week"></i> @item.TaskStartDate</div>
+                        }else{
+                            <div class="text-muted  p-1  border rounded bg-light"><i class="bi bi-calendar-week"></i> @Model.TaskDate</div>
+                      
                         }
                        
                     
@@ -155,6 +173,13 @@
 
                 </div>
             }
+            }
+        }
+        @if (@Model.Offers.Count() == 0)
+        {
+            <div class="text-muted">
+                <i class="bi bi-info-circle"></i> There are no offers yet for this task. You might increase your chances if you will raise the buget.
+            </div>
         }
     </div>
 </div>

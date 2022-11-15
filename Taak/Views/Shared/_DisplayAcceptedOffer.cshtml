@@ -1,0 +1,65 @@
+﻿@model OfferWithTaskWorkerDataViewModel
+@{
+    var originalAccepted = (bool)Model.IsOriginalOfferAccepted;
+}
+
+            @if (originalAccepted)
+            {
+                <div class="d-flex w-75 pb-2">
+                    <div class="w-75 d-flex flex-column  p-3 border mb-2 rounded me-4" style="min-height:30px; background-color:#fceedc">
+                        <div class="text-warning" >Offer made by accepting the published task conditions.</div>
+                        <div class="text-muted"><i class="bi bi-person-bounding-box"></i> @Model.WorkerName</div>
+                        <div class="w-100 text-muted"><i class="bi bi-phone-flip"></i> @Model.Phone</div>
+                    </div>
+                    
+                    <div class="w-25 d-flex flex-column justify-content-center align-content-center bg-ligth p-3 border mb-2 rounded" style="min-height:30px;">
+                      <a class="btn btn-danger text-white"  asp-controller="Offer" asp-action="CancelAcceptedOffer" asp-route-idOffer="@Model.IdOffer">Cancel the offer</a>
+                    </div>
+                   
+                </div>
+            }
+            else
+            {
+                <div class="d-flex w-75 pb-2">
+                    <div class="w-50 d-flex flex-column  p-3 border mb-2 rounded me-4" style="min-height:30px;background-color:#fceedc">
+                        <div class="w-100 d-flex justify-content-between">
+                            <div class="text-muted"><i class="bi bi-person-bounding-box"></i> @Model.WorkerName</div>
+                            <div class="text-info">Custom Offer</div>
+                        </div>
+                        <div class="w-100 text-muted"><i class="bi bi-phone-flip"></i> @Model.Phone</div>
+                        @if(Model.SpecialRequirements!=null){
+                           <div class="w-100 text-muted"><i class="bi bi-exclamation-octagon"></i> @Model.SpecialRequirements</div>
+                       }
+                       else{
+                           <div class="w-100 text-muted"><i class="bi bi-exclamation-octagon"></i> - no special requirments</div>
+                      
+                       }
+
+                    </div>
+                    <div class="w-25 d-flex flex-column gap-2  p-1  mb-2  me-4" style="min-height:30px;">
+                        @if (@Model.Buget != null)
+                        {
+                             <div class="text-info  p-1  border rounded " style="background-color:#fceedc"><i class="bi bi-piggy-bank-fill"></i> @Model.Buget.ToString("#") RON</div>
+                        }else{
+                            <div class="text-info  p-1  border rounded " style="background-color:#fceedc"><i class="bi bi-piggy-bank-fill"></i> @ViewBag.Buget.ToString("#") RON</div>
+                    
+                        }
+                        
+                        @if (@Model.TaskStartDate != null)
+                        {
+                             <div class="text-info  p-1  border rounded " style="background-color:#fceedc"><i class="bi bi-calendar-week"></i> @Model.TaskStartDate</div>
+                        }else{
+                            <div class="text-info  p-1  border rounded " style="background-color:#fceedc"><i class="bi bi-calendar-week"></i> @ViewBag.TaskDate</div>
+                      
+                        }
+                       
+                    
+                    </div>
+                 
+                    <div class="w-25 d-flex flex-column justify-content-center align-content-center bg-ligth p-3 border mb-2 rounded" style="min-height:30px;">
+                      <a class="btn btn-danger text-white"  asp-controller="Offer" asp-action="CancelAcceptedOffer" asp-route-idOffer="@Model.IdOffer">Cancel the offer</a>
+                    </div>
+                   
+
+                </div>
+            }
