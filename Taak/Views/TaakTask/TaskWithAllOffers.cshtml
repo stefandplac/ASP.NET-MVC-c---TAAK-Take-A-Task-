@@ -1,0 +1,160 @@
+﻿@model Taak.ViewModels.TaakTaskWithOffersViewModel
+
+@{
+    ViewData["Title"] = "TaskWithAllOffers";
+    Layout = "_CustomerCMSLayout";
+    var date = @Model.TaskDate;
+}
+<div class="container w-100 d-flex flex-column">
+    <div class=" container w-100 d-flex flex-column pt-4 pb-4 pe-4 mb-3 bg-light "  onmouseover=" $(this).children('#btnAction').show();" onmouseout="    $(this).children('#btnAction').hide();">
+                    <div name="taskHeader" class="w-100 d-flex ">
+                        <div class="w-50 d-flex flex-column gap-1">
+                            <div class="w-100 text-primary text-capitalize">
+                                @Model.Title
+                            </div>
+                            <div class="w-100 text-body">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>@Model.City, @Model.County</span>
+                            </div>
+                            <div class="w-100 text-muted">
+                                <i class="bi bi-calendar-event"></i>
+                                @Model.PostedDate.ToString("dddd, dd MMMM yyyy")
+
+                            </div>
+                            <div class="w-100  bg-white rounded " >
+                                @Model.Description
+                            </div>
+                            @if (!String.IsNullOrEmpty(Model.SpecialRequirements))
+                            {
+                                <div class="w-100 text-danger">
+                                    <i class="bi bi-bell"></i>  @Model.SpecialRequirements
+
+
+                                </div>
+                            }
+                            
+
+                        </div>
+                        <div class="w-25 d-flex flex-column text-center ">
+
+                            <span>@Model.Buget.ToString("#")</span>
+                            <span style="font-size:12px;">RON</span>
+
+                        </div>
+                        <div class="w-25 d-flex flex-column ps-2 " >
+                            <div class="w-100  ps-2 text-white bg-success bg-opacity-75" style="background-color:#a2c6ba;">
+                                <i class="bi bi-hourglass-split"></i> @Model.DateOption 
+                            </div>
+                            @if (Model.DateOption.Trim() == "Flexible")
+                            {
+                                <div class="taskDate w-100  ps-2 text-success" >
+                                    <i class="bi bi-caret-right-fill"></i> week: before - after
+                                </div>
+                            }
+                            <div class="taskDate w-100 border-bottom ps-2 text-success" >
+                                @Model.TaskDate.ToString("dd MMMM yyyy")
+                            </div>
+                            <div class="daysLeft w-100 border-bottom ps-2 text-success" id="daysLeft">
+
+                            </div>
+                            @if (!String.IsNullOrEmpty(@Model.TimeOptions))
+                            {
+                                var timeFrames = @Model.TimeOptions.Replace(" ", "").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                                <div class="w-100 ps-2 text-white " style="background-color:#008fb4;">
+                                    <i class="bi bi-clock-history"></i> Time Frame
+                                </div>
+                                @foreach (var time in timeFrames)
+                                {
+                                    <div class="w-100 border-top-0  ps-2 text-muted" style="border-color:8ac6d5;">
+                                        @Html.Raw(@ViewBag.TimeFramesIcons[@time]) @time: @ViewBag.TimeFrames[@time] 
+                                    </div>
+                                }
+
+                            }
+
+                        </div>
+                        <div class="bg-danger" w-100 border" id="testv2"></div>
+
+                    </div>
+                    <div id="offersDisplay" style="">
+                        <div class="w-100">
+
+                        </div>
+                    </div>
+                    
+     </div>
+     <div name="offersList" class="container w-100 d-flex flex-column pt-4">
+        @foreach(var item in @Model.Offers)
+        {
+            var originalAccepted = (bool)@item.IsOriginalOfferAccepted;
+            
+
+            if (originalAccepted)
+            {
+                <div class="d-flex w-75 pb-2">
+                    <div class="w-75 d-flex flex-column bg-light p-3 border mb-2 rounded me-4" style="min-height:30px;">
+                        <div class="text-warning">Offer made by accepting the published task conditions.</div>
+                        <div class="text-muted"><i class="bi bi-person-bounding-box"></i> @item.WorkerName</div>
+                        <div class="w-100 text-muted"><i class="bi bi-phone-flip"></i> @item.Phone</div>
+                    </div>
+                    @if(@Model.AcceptedOffer==null){
+                    <div class="w-25 d-flex bg-light p-3 border mb-2 rounded" style="min-height:30px;">
+                     <a class="btn btn-secondary"  asp-controller="Offer" asp-action="AcceptOfferByCustomer" asp-route-idOffer="@item.IdOffer">Accept the offer</a>
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="w-25 d-flex bg-light p-3 border mb-2 rounded text-center text-muted" style="min-height:30px;">
+                             <a class="btn btn-secondary text-muted bg-light" href="#" >Accept the offer</a>
+                   
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="d-flex w-75 pb-2">
+                    <div class="w-50 d-flex flex-column bg-light p-3 border mb-2 rounded me-4" style="min-height:30px;">
+                        <div class="w-100 d-flex justify-content-between">
+                            <div class="text-muted"><i class="bi bi-person-bounding-box"></i> @item.WorkerName</div>
+                            <div class="text-info">Custom Offer</div>
+                        </div>
+                        <div class="w-100 text-muted"><i class="bi bi-phone-flip"></i> @item.Phone</div>
+                       <div class="w-100 text-muted"><i class="bi bi-exclamation-octagon"></i> @item.SpecialRequirements</div>
+                      
+
+                    </div>
+                    <div class="w-25 d-flex flex-column gap-2  p-1  mb-2  me-4" style="min-height:30px;">
+                        @if (@item.Buget != null)
+                        {
+                             <div class="text-info  p-1  border rounded bg-light"><i class="bi bi-piggy-bank-fill"></i> @item.Buget.ToString("#") RON</div>
+                        }
+                        
+                        @if (@item.TaskStartDate != null)
+                        {
+                             <div class="text-info  p-1  border rounded bg-light"><i class="bi bi-calendar-week"></i> @date</div>
+                        }
+                       
+                    
+                    </div>
+                    @if(@Model.AcceptedOffer==null){
+                    <div class="w-25 d-flex bg-light p-3 border mb-2 rounded" style="min-height:30px;">
+                      <a class="btn btn-secondary"  asp-controller="Offer" asp-action="AcceptOfferByCustomer" asp-route-idOffer="@item.IdOffer">Accept the offer</a>
+                        </div>
+                    }
+                    else
+                    {
+                        {
+                        <div class="w-25 d-flex bg-light p-3 border mb-2 rounded text-center text-muted bg-secondary" style="min-height:30px;">
+                             <a class="btn btn-secondary text-muted bg-light" style="color:#E0E0E0" href="#" >Accept the offer</a>
+                   
+                        </div>
+                    }
+                    }
+
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -109,6 +109,7 @@ namespace Taak.Controllers
             var idCustomer = customerRepository.GetCustomerId(idUser);
             var taakTasks = taakTaskRepository.GetAll().Where(task => task.IdCustomer == idCustomer);
             taakTasks = TasksFilters.SortByMostRecent(taakTasks);
+            
             ViewBag.TimeFrames = Constants.TimeFrames;
             ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
 
@@ -123,12 +124,41 @@ namespace Taak.Controllers
 
             taakTasks = taakTasks.Skip((pageNumber - 1) * pageSize).Take(pageSize);
             
+            
             return View(taakTasks);
+        }
+        //only GET method for this action
+        [Authorize(Roles = "Customer")]
+        public ActionResult TaskWithAllOffers(Guid idTask)
+        {
+            var taakTask = taakTaskRepository.GetById(idTask);
+            var offers = offerRepository.GetAllOffersByTask(idTask);
+            List<OfferWithTaskWorkerDataViewModel> offersWithWorkerData = new List<OfferWithTaskWorkerDataViewModel>();
+            foreach(var offer in offers)
+            {
+                var offerWithWorkerDetails = new OfferWithTaskWorkerDataViewModel(offer,taskWorkerRepository);
+                offersWithWorkerData.Add(offerWithWorkerDetails);
+            }
+            
+            var taakTaskWithOffer = new TaakTaskWithOffersViewModel(taakTask, offersWithWorkerData);
+            
+            //we want also to add the accepted offer to the model if exists - to present it individually without looping the list
+            var acceptedOffer = offerRepository.ReturnAcceptedOffer(idTask);
+            OfferWithTaskWorkerDataViewModel offerWithWorkerData;
+            if (acceptedOffer != null)
+            {
+                offerWithWorkerData = new OfferWithTaskWorkerDataViewModel(acceptedOffer, taskWorkerRepository);
+                taakTaskWithOffer.AcceptedOffer = offerWithWorkerData;
+            }
+            ViewBag.TimeFrames = Constants.TimeFrames;
+            ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
+
+            return View(taakTaskWithOffer);
         }
 
 
         // GET: TaakTaskController/Details/5
-        [Authorize(Roles ="Customer,Admin")]
+        [Authorize(Roles ="Customer")]
         public ActionResult Details(Guid id)
         {
             var taakTask = taakTaskRepository.GetById(id);

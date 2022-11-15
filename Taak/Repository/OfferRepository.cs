@@ -26,6 +26,11 @@ namespace Taak.Repository
             var offersByWorker = base.GetAll().Where(offer => offer.IdTaskWorker == idTaskWorker).ToList();
             return offersByWorker;
         }
+        public List<OfferModel> GetAllOffersByTask(Guid idTask)
+        {
+            var offersByTask = base.GetAll().Where(offer => offer.IdTask == idTask).ToList();
+            return offersByTask;
+        }
         public void DeleteRange(IEnumerable<OfferModel> offers)
         {
             if (offers.Count() > 0)
@@ -37,6 +42,11 @@ namespace Taak.Repository
                 }
                 
             }
+        }
+        public OfferModel ReturnAcceptedOffer(Guid idTask)
+        {
+            var acceptedOffer = base.GetAll().Where(item => item.IdTask == idTask && item.IsAccepted==true).FirstOrDefault();
+            return acceptedOffer;
         }
     }
 }

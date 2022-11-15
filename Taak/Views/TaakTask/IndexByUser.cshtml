@@ -37,6 +37,8 @@
 
                                 </div>
                             }
+                            <a class="btn align-self-start text-ligth m-0 p-0"  asp-controller="TaakTask" asp-action="TaskWithAllOffers" asp-route-idTask="@item.IdTask"><i class="bi bi-caret-down-fill"></i> View Offers</a>
+                            
 
                         </div>
                         <div class="w-25 d-flex flex-column text-center ">
@@ -81,13 +83,20 @@
                         <div class="bg-danger" w-100 border" id="testv2"></div>
 
                     </div>
+                    <div id="offersDisplay" style="">
+                        <div class="w-100">
+
+                        </div>
+                    </div>
                     <div style="display:none;"  id="btnAction">
                         <div class="w-100 d-flex justify-content-end gap-2 pt-2" id="btnAction" >
+                             
                             <a class="btn  text-white" style="background-color:#92a8ad" asp-controller="TaakTask" asp-action="Edit" asp-route-id="@item.IdTask">Edit</a>
                             <a class="btn  bg-danger bg-opacity-75 text-white"  asp-controller="TaakTask" asp-action="Delete" asp-route-id="@item.IdTask">Delete</a>
                         </div>
                     </div>
                 </div>
+                
             }
         </div>
 

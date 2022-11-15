@@ -59,6 +59,7 @@ namespace Taak.Controllers
 
             return View(offersViewModelByWorker);
         }
+
         
 
         // GET: OfferController/Details/5
@@ -193,7 +194,14 @@ namespace Taak.Controllers
             offerRepository.Delete(id);
             return RedirectToAction("IndexByTaskWorker");
         }
-
-        
+        [Authorize(Roles ="Customer")]
+        public ActionResult AcceptOfferByCustomer(Guid idOffer)
+        {
+            var offerAccepted = offerRepository.GetById(idOffer);
+            var idTask = offerAccepted.IdTask;
+            offerAccepted.IsAccepted = true;
+            offerRepository.Update(offerAccepted, idOffer);
+            return RedirectToAction("TaskWithAllOffers", "TaakTask", new {idTask=idTask});
+        }
     }
 }
