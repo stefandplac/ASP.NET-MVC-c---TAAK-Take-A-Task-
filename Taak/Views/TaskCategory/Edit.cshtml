@@ -2,17 +2,17 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "_AdminCMSLayout";
 }
 
-<h1>Edit</h1>
 
-<h4>TaskCategoryModel</h4>
-<hr />
-<div class="row">
+<div class="row p-3">
+    <h5>Edit Category Details</h5>
+    <hr />
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="IdTaskCategory" class="control-label"></label>
                 <input asp-for="IdTaskCategory" class="form-control" />
                 <span asp-validation-for="IdTaskCategory" class="text-danger"></span>
@@ -34,8 +34,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="ps-3">
+    <a asp-controller="TaskCategory" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

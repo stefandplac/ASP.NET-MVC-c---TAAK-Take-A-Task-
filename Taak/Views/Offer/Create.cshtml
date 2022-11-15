@@ -3,11 +3,15 @@
 @{
     ViewData["Title"] = "Create";
     Layout = "_WorkerCMSLayout";
+    
 }
 <div class="container w-100 d-flex justify-content-between bg-light  p-4">
     <partial name="_TaskOfferCreateCardComponent" model="@Model.TaakTask" />
-    <div class="container w-50 d-flex flex-column justify-content-center">
-        <h5>Make an Offer</h5>
+
+
+
+    <div class="container w-50 d-flex flex-column ">
+        <div class=" w-75 mb-2"><h5>Make an Offer</h5></div>
         
         <div class="row">
             <div class="w-75">
@@ -29,22 +33,22 @@
                         <span asp-validation-for="IdTaskWorker" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Buget" class="control-label"></label>
+                        <label asp-for="Buget" class="control-label">Buget</label>
                         <input asp-for="Buget" type="number" min="10" class="form-control" value="10" />
                         <span asp-validation-for="Buget" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="SpecialRequirements" class="control-label"></label>
+                        <label asp-for="SpecialRequirements" class="control-label">Cerinte Speciale</label>
                         <input asp-for="SpecialRequirements" class=" form-control" />
                         <span asp-validation-for="SpecialRequirements" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="TaskStartDate" class="control-label"></label>
+                        <label asp-for="TaskStartDate" class="control-label">Data Incepere</label>
                         <input asp-for="TaskStartDate" class="form-control" />
                         <span asp-validation-for="TaskStartDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="EstimatedTime" class="control-label"></label>
+                        <label asp-for="EstimatedTime" class="control-label">Durata Estimata</label>
                         <input asp-for="EstimatedTime" class="form-control" />
                         <span asp-validation-for="EstimatedTime" class="text-danger"></span>
                     </div>
@@ -56,9 +60,7 @@
             </div>
         </div>
 
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
+       
     </div>
 </div>
 @section Scripts {

@@ -6,7 +6,7 @@
 }
 
 
-<div class="w-100 ps-5 pt-4 pb-4 pe-4 bg-light">
+<div class="w-100 p-4 bg-light">
     <h4>Profile Data</h4>
     <hr />
     <dl class="row ">
@@ -62,7 +62,7 @@
     </dl>
     <div>
        <a asp-controller="TasksWorker" asp-action="Edit" asp-route-id="@Model.IdTaskWorker">Edit</a>
-       <a asp-controller="TasksWorker" asp-action="Delete" asp-route-id="@Model.IdTaskWorker">Delete</a>
+       <a asp-controller="TasksWorker" asp-action="Delete" asp-route-id="@Model.IdTaskWorker" hidden>Delete</a>
     </div>
 </div>
 

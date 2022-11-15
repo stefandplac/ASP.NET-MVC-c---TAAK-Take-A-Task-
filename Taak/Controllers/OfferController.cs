@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
 using Taak.Data;
+using Taak.Libraries.Constants;
 using Taak.Models;
 using Taak.Repository;
 using Taak.ViewModels;
@@ -77,7 +78,9 @@ namespace Taak.Controllers
             var idUser = HttpContext.Session.GetString("UserId");
             var idTaskWorker = taskWorkerRepository.GetTaskWorkerByUserId(idUser).IdTaskWorker;
             var offerModel = new OfferViewModelCreate(idTask, idTaskWorker,taakTaskRepository);
-            
+            ViewBag.TimeFrames = Constants.TimeFrames;
+            ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
+
             return View(offerModel);
         }
 
@@ -156,6 +159,10 @@ namespace Taak.Controllers
             {
                 return RedirectToAction("Index");
             }
+            var taakTask = taakTaskRepository.GetById(offer.IdTask);
+            ViewBag.Task = taakTask;
+            ViewBag.TimeFrames = Constants.TimeFrames;
+            ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
 
             return View(offer);
         }

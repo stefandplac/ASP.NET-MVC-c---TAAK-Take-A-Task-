@@ -3,60 +3,72 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "_WorkerCMSLayout";
+    
 }
 
-<h1>Edit</h1>
 
-<h4>OfferModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" hidden>
-                <label asp-for="IdOffer" class="control-label"></label>
-                <input asp-for="IdOffer" class="form-control" />
-                <span asp-validation-for="IdOffer" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="IdTask" class="control-label"></label>
-                <input asp-for="IdTask" class="form-control" />
-                <span asp-validation-for="IdTask" class="text-danger"></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="IdTaskWorker" class="control-label"></label>
-                <input asp-for="IdTaskWorker" class="form-control" />
-                <span asp-validation-for="IdTaskWorker" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Buget" class="control-label"></label>
-                <input asp-for="Buget" class="form-control" />
-                <span asp-validation-for="Buget" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SpecialRequirements" class="control-label"></label>
-                <input asp-for="SpecialRequirements" class="form-control" />
-                <span asp-validation-for="SpecialRequirements" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TaskStartDate" class="control-label"></label>
-                <input asp-for="TaskStartDate" class="form-control" />
-                <span asp-validation-for="TaskStartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EstimatedTime" class="control-label"></label>
-                <input asp-for="EstimatedTime" class="form-control" />
-                <span asp-validation-for="EstimatedTime" class="text-danger"></span>
-            </div>
+<div class="container w-100 d-flex justify-content-between bg-light  p-4">
+    <partial name="_TaskOfferCreateCardComponent" model="@ViewBag.Task" />
+
+    <div class="container w-50 d-flex flex-column m-0 p-0 bg-light " style="background-color:#fff6eb">
+     
+   
+        <div class=" w-75 mb-2"><h5>Update Offer</h5></div>
+        <div class="row ">
+    
+            <div class="w-75">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group" hidden>
+                        <label asp-for="IdOffer" class="control-label"></label>
+                        <input asp-for="IdOffer" class="form-control" />
+                        <span asp-validation-for="IdOffer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="IdTask" class="control-label"></label>
+                        <input asp-for="IdTask" class="form-control" />
+                        <span asp-validation-for="IdTask" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="IdTaskWorker" class="control-label"></label>
+                        <input asp-for="IdTaskWorker" class="form-control" />
+                        <span asp-validation-for="IdTaskWorker" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Buget" class="control-label"></label>
+                        <input asp-for="Buget" class="form-control" />
+                        <span asp-validation-for="Buget" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpecialRequirements" class="control-label"></label>
+                        <input asp-for="SpecialRequirements" class="form-control" />
+                        <span asp-validation-for="SpecialRequirements" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TaskStartDate" class="control-label"></label>
+                        <input asp-for="TaskStartDate" class="form-control" />
+                        <span asp-validation-for="TaskStartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EstimatedTime" class="control-label"></label>
+                        <input asp-for="EstimatedTime" class="form-control" />
+                        <span asp-validation-for="EstimatedTime" class="text-danger"></span>
+                    </div>
            
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+
+        <div class="ps-3">
+            <a asp-controller="Offer" asp-action="IndexByTaskWorker">Back to List</a>
+        </div>
+      
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
