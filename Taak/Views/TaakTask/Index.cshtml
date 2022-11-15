@@ -2,10 +2,11 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "_CustomerCMSLayout";
+    Layout = "_AdminCMSLayout";
 }
-
-<h1>Index</h1>
+<div class="border-bottom">
+<h5>All Posted Tasks</h5>
+</div>
 
 @if (Model.Count() != 0)
 {
@@ -34,21 +35,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.City)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Street)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Building)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Floor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.County)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Country)
-                </th>
+                
                 <th></th>
             </tr>
         </thead>
@@ -79,25 +66,12 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.City)
                     </td>
+                   
                     <td>
-                        @Html.DisplayFor(modelItem => item.Street)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Building)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Floor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.County)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
-                    <td>
-                        <asp asp-controller="TaakTask" asp-action="Details" asp-route-id="@item.IdTask">Details</asp>
-                        <asp asp-controller="TaakTask" asp-action="Update" asp-route-id="@item.IdTask">Update</asp>
-                        <asp asp-controller="TaakTask" asp-action="Delete" asp-route-id="@item.IdTask">Delete</asp>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a class="btn btn-danger" asp-controller="TaakTask" asp-action="Delete" asp-route-id="@item.IdTask">Delete</a>
+                        }
                     </td>
                 </tr>
             }

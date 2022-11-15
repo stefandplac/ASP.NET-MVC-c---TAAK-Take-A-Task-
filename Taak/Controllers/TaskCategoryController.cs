@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Taak.Data;
 using Taak.Models;
@@ -6,7 +7,7 @@ using Taak.Repository;
 
 namespace Taak.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class TaskCategoryController : Controller
     {
         private readonly TaskCategoryRepository taskCategoryRepository;

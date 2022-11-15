@@ -33,7 +33,7 @@ namespace Taak.Controllers
         }
 
         // GET: TasksWorkerController/Create
-       
+        [Authorize(Roles = "Worker")]
         public ActionResult Create(string userId)
         {
             var idTaskWorker = Guid.NewGuid();
@@ -58,7 +58,7 @@ namespace Taak.Controllers
         // POST: TasksWorkerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
+        [Authorize(Roles = "Worker")]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -137,6 +137,7 @@ namespace Taak.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        [Authorize(Roles = "Worker")]
         public ActionResult WorkerProfile()
         {
             var idUser = HttpContext.Session.GetString("UserId");

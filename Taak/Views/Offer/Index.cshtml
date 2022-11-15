@@ -4,41 +4,35 @@
     ViewData["Title"] = "Index";
     Layout = "_AdminCMSLayout";
 }
+<div class="border-bottom">
+<h5>All Offers</h5>
+</div>
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.IdOffer)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTask)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTaskWorker)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Buget)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SpecialRequirements)
+                Special Requir
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskStartDate)
+                Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EstimatedTime)
+                Time
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsAccepted)
+                Accepted
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsOriginalOfferAccepted)
+                Custom
             </th>
             <th></th>
         </tr>
@@ -49,12 +43,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdOffer)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTask)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTaskWorker)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Buget)
             </td>
@@ -74,9 +63,7 @@
                 @Html.DisplayFor(modelItem => item.IsOriginalOfferAccepted)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a class="btn btn-danger" asp-controller="Offer" asp-action="Delete" asp-route-id="@item.IdOffer">Delete</a>
             </td>
         </tr>
 }

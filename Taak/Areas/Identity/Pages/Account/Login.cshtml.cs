@@ -133,6 +133,10 @@ namespace Taak.Areas.Identity.Pages.Account
                     {
                         return RedirectToAction("SearchTaskIndex", "TaakTask");
                     }
+                    else if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "TaakTask");
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

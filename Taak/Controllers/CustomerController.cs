@@ -43,7 +43,7 @@ namespace Taak.Controllers
         }
 
         // GET: CustomerController/Create
-       
+        [Authorize(Roles = "Customer")]
         public ActionResult Create(string userId)
         {
             
@@ -70,7 +70,7 @@ namespace Taak.Controllers
         // POST: CustomerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
+        [Authorize(Roles = "Customer")]
         public ActionResult Create(IFormCollection collection)
         {
             try

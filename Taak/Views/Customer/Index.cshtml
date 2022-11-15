@@ -7,8 +7,9 @@
 }
 
 
-
-
+<div class="border-bottom">
+<h5>All Customers</h5>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -69,11 +70,9 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                @*<a asp-controller="Customer" asp-action="Details" asp-route-id="@item.IdCustomer">Edit</a>*@
-                
-                @*<a id="custDetails" asp-controller="Customer" asp-action="Delete" asp-route-id="@item.IdCustomer">Delete</a>*@
-                <a id="custDetails" href="#"> Details</a>
+               
+                <a class="btn btn-danger" id="custDetails" asp-controller="Customer" asp-action="Delete" asp-route-id="@item.IdCustomer">Delete</a>
+            
             </td>
         </tr>
 }

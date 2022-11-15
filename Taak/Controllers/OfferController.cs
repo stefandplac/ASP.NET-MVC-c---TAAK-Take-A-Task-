@@ -21,6 +21,7 @@ namespace Taak.Controllers
             taakTaskRepository = new TaakTaskRepository(db);
         }
         // GET: OfferController
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var offers = offerRepository.GetAll();
@@ -60,9 +61,10 @@ namespace Taak.Controllers
             return View(offersViewModelByWorker);
         }
 
-        
+
 
         // GET: OfferController/Details/5
+        [Authorize(Roles = "Worker,Admin")]
         public ActionResult Details(int id)
         {
             return View();
@@ -192,8 +194,13 @@ namespace Taak.Controllers
                 return RedirectToAction("Index");
             }
             offerRepository.Delete(id);
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("IndexByTaskWorker");
         }
+
         [Authorize(Roles ="Customer")]
         public ActionResult AcceptOfferByCustomer(Guid idOffer)
         {
