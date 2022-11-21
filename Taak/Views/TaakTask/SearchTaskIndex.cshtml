@@ -72,91 +72,84 @@
 </form>
 @if (Model.Tasks.Count() != 0)
 {
-
-    <table class="table table-striped">
-        <thead>
-            <tr class="text-muted" >                
-                <th>
-                    Task
-                </th>
-                
-                <th>
-                    Buget
-                </th>
-                
-                <th>
-                    Data Postarii
-                </th>
-                <th>
-                    Termen Limita
-                </th>
-                <th>
-                    Location
-                
-                </th>
-               
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Tasks)
-            {
-                <tr>
-
-                   
-                    <td>
-                        <div class="container w-100 d-flex flex-column">
-                            <div class="border-bottom pb-2">
-                                 @Html.DisplayFor(modelItem => item.Title)
-                            </div>
-                            <div class="pb-1">
-                                  @Html.DisplayFor(modelItem => item.Description)
-                            </div>
-                            @if(!String.IsNullOrEmpty(@item.SpecialRequirements))
-                            {
-                            <div class="text-light border rounded p-1 border-white bg-warning" >
-                                 @Html.DisplayFor(modelItem => item.SpecialRequirements)
-                            </div>
-                            }
-                               
-                                
-                        </div>
-                    </td>
-                   
-                    <td>
+    @foreach (var item in Model.Tasks)
+    {
+        <div class="container container-fluid w-100  d-flex p-2 pb-4 bg-light mb-3 mt-1 pt-1">
+            <div class="w-50 d-flex flex-column bg-light">
+                <div class="pb-2 text-capitalize" style="color:blue; font-weight:`600;">
+                    @item.Title
+                </div>
+                <div class="text-muted pb-2">
+                    <i class="bi bi-geo-alt"></i>
+                    @String.Concat(@item.City,", jud.",@item.County)
+                </div>
+                <div class="pb-1 bg-white">
+                    @item.Description
+                </div>
+                @if (!String.IsNullOrEmpty(@item.SpecialRequirements))
+                {
+                    <div class="text-danger" >
+                        <i class="bi bi-bell"></i> @item.SpecialRequirements
+                    </div>
+                }
+            </div>
+            <div class="w-50 d-flex">
+                <div class="w-75 d-flex">
+                    <div class="w-25 align-self-start  justify-content-center">
                         <div class="badge  text-wrap  align-self-center" style="width: auto;min-width:3rem;min-height:2rem;font-size:14px;color:#ffff66;background-color:#6699ff">
-                             @item.Buget.ToString("#") <br/><span style="font-size:10px;">RON</span>
+                            @item.Buget.ToString("#") <br/><span style="font-size:10px;">RON</span>
                         </div>
-                    </td>
-                    
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PostedDate)
-                    </td>
-                    <td>
-                        @item.TaskDate
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    
-                        @Html.DisplayFor(modelItem => item.Street)
-                   
-                        @Html.DisplayFor(modelItem => item.Building)
-                    
-                        @Html.DisplayFor(modelItem => item.County)
-                    </td>
-                    
-                    <td class="m-4">
-                        @if (User.IsInRole("Worker"))
-                        {
-                            <a class="page-link rounded text-light text-center" style="background-color:#99d992" asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task</a>
-                            <a class="page-link rounded text-light text-center" style="background-color:#7bbac9" asp-controller="Offer" asp-action="Create" asp-route-idTask="@item.IdTask">Make Offer</a>
-                        }
+                    </div>
+                    <div class="w-75 d-flex flex-column">
+                        <div class="w-75">
+                             <div class="w-100  ps-2 text-white bg-success bg-opacity-75" style="background-color:#a2c6ba;">
+                                <i class="bi bi-hourglass-split"></i> @item.DateOption 
+                            </div>
+                            @if (item.DateOption.Trim() == "Flexible")
+                            {
+                                <div class="taskDate w-100  ps-2 text-success" >
+                                    <i class="bi bi-caret-right-fill"></i> week: before - after
+                                </div>
+                            }
+                            <div class="taskDate w-100 border-bottom ps-2 text-success" >
+                                @item.TaskDate.ToString("dd MMMM yyyy")
+                            </div>
+                            <div class="daysLeft w-100 border-bottom ps-2 text-success" id="daysLeft">
 
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                            </div>
+                            @if (!String.IsNullOrEmpty(@item.TimeOptions))
+                            {
+                                var timeFrames = @item.TimeOptions.Replace(" ", "").Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                                <div class="w-100 ps-2 text-white " style="background-color:#008fb4;">
+                                    <i class="bi bi-clock-history"></i> Time Frame
+                                </div>
+                                @foreach (var time in timeFrames)
+                                {
+                                    <div class="w-100 border-top-0  ps-2 text-muted" style="border-color:#8ac6d5;">
+                                        @Html.Raw(@ViewBag.TimeFramesIcons[@time]) @time: @ViewBag.TimeFrames[@time] 
+                                    </div>
+                                }
+
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="w-25 d-flex flex-column">
+                    @if (User.IsInRole("Worker"))
+                    {
+                        <div class="" style="">
+                            <a class="page-link rounded text-light text-center" style="background-color:#99d992; height:65px; width:90px;" asp-controller="Offer" asp-action="AcceptTaskOfferCreate" asp-route-idTask="@item.IdTask">Accept Task</a>
+                        </div>
+                        <div class="h-50">
+                            <a class="page-link rounded text-light text-center" style="background-color:#7bbac9; height:65px; width:90px; " asp-controller="Offer" asp-action="Create" asp-route-idTask="@item.IdTask">Make Offer</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    
      <div class="container container-fluid w-100 flex-grow-1 d-flex justify-content-center align-items-end">
 
         <nav aria-label="Page navigation example ">

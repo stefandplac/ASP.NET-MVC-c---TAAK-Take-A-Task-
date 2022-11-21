@@ -1,4 +1,6 @@
-﻿namespace Taak.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Taak.Models
 {
     public class TaakTaskModel
     {
@@ -6,6 +8,8 @@
         public Guid IdTaskCategory { get; set; }
         public Guid IdCustomer { get; set; }
         public string Title { get; set; } = null!;
+
+        [MinLength(20, ErrorMessage = "The description must be at least 20 characters")]
         public string Description { get; set; } = null!;
         public decimal Buget { get; set; }
         public string? SpecialRequirements { get; set; }

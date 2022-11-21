@@ -3,92 +3,87 @@
     var isAccepted = @Model.IsAccepted==null? false : (bool)@Model.IsAccepted;
 }
 
-<div class="w-100 container d-flex flex-column border rounded mb-3 ms-4 me-4 bg-light">
+<div class="w-100 h-100 container d-flex   mb-3 pb-1">
+ <div class="w-100 h-100 container d-flex border rounded bg-light ms-2 me-2 mb-1 pt-1 pb-2 ">
     <partial name="_TaskOfferCardComponent" model="@Model.TaakTask"></partial>
-    <div class="W-100 d-flex justify-content-end pb-2 ">
+    
+   <div class="container h-100 w-50 d-flex flex-column  gap-1 m-0 p-0 h-auto">
         
-        <div class="w-50 ps-2 border-top">
-            Detalii oferta:
+        <div class="w-100 h-100 d-flex flex-column ps-2 pt-2 justify-content-end"  >
+            
             @if ((bool)Model.IsOriginalOfferAccepted)
             {
-                <div class="text-primary">
+                <div class="text-warning">
                     The offer is made by accepting the task conditions
                 </div>
 
             }
             else
             {
-                <div class="text-primary" >
-                    Custom Offer
-                </div>
-                <div class="container w-100 d-flex flex-column m-0 p-0 collapse" th:id= {offerDetails${id}}>
-                    <div class="container d-flex w-100 justify-content-between m-0 p-0">
-                        @if (@Model.Buget!=0)
+               <div class="w-100 d-flex ">
+                   <div class="w-50 d-flex flex-column">
+                        <div class="text-info" >
+                            Custom Offer
+                        </div>
+                         @if (@Model.Buget!=0)
                         {
-                            <div class="w-50">
-                                Budget: @Model.Buget.ToString("#")
+                            <div class="w-50 text-muted">
+                                <i class="bi bi-piggy-bank-fill"></i> @Model.Buget.ToString("#")
                             </div>
                         }
-                        <div class="w-50 d-flex flex-column m-0 p-0">
-                            @if (!String.IsNullOrEmpty(@Model.TaskStartDate.ToString()))
+                         @if (!String.IsNullOrEmpty(@Model.TaskStartDate.ToString()))
                             {
-                            <div class="">
-                                    Start Date: @Model.TaskStartDate
+                            <div class="text-muted">
+                                    <i class="bi bi-calendar2-event"></i> @Model.TaskStartDate
                             </div>
                             }
                             @if (@Model.EstimatedTime!=null)
                             {
-                            <div class="">
-                                    Estimate Time: @Model.EstimatedTime.ToString();
+                            <div class="text-muted">
+                                    <i class="bi bi-hourglass-split"></i> Time: @Model.EstimatedTime.ToString()
                             </div>
                             }
-                        </div>
+                             @if (isAccepted)
+                            {
+                                <div class="container w-100 text-capitalize text-info">
+                                    <i class="bi bi-emoji-smile"></i> Offer was accepted.You are hired!
+                                </div>
+                            }
                     </div>
-                    @if (!String.IsNullOrEmpty(@Model.SpecialRequirements))
-                    {
-                        <div class="w-100">
-                            <div class="">
-                                Special Requirments
-                            </div>
-                            <div class="">
-                                @Model.SpecialRequirements
-                            </div>
+                    <div class="w-50 d-flex flex-column">
+                            @if (!String.IsNullOrEmpty(@Model.SpecialRequirements))
+                             {
+                                <div class="w-100">
+                                    <div class="">
+                                        Special Requirments
+                                    </div>
+                                    <div class="">
+                                        @Model.SpecialRequirements
+                                    </div>
 
-                        </div>
-                    }
+                                </div>
+                            }
+                    </div>
+               </div>
+              
+            }
 
-                </div>
-            }
-            @if (isAccepted)
-            {
-                <div class="container w-100 text-capitalize">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                      <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
-                    </svg>
-                    Offer was accepted.You are hired!
-                </div>
-            }
-            <div class="w-100 d-flex gap-2 mt-2 ">
+           
+            <div class="w-100  d-flex gap-2 mt-auto" >
               
                  <div class="container d-flex align-content-center justify-content-center border border-secondary rounded m-0 p-0" style="width:70px;height:30px;">
                       <a asp-controller="Offer" asp-action="Edit" asp-route-id="@Model.IdOffer" class="text-decoration-none" style="color:grey;">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="grey" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                        </svg>
-                         Edit
+                         <i class="bi bi-pencil-square"></i> Edit
                         </a>
                  </div>
                 <div class="container d-flex align-content-center justify-content-center border border-warning rounded m-0 p-0" style="width:90px;height:30px">
                          <a asp-controller="Offer" asp-action="Delete" asp-route-id="@Model.IdOffer" class="text-decoration-none" style="color:red;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                              <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                            </svg>
-                             Delete
+                           <i class="bi bi-trash3-fill"></i> Delete
                      </a>
                  </div>
             </div>
+
         </div>
     </div>
+</div>
 </div>

@@ -48,6 +48,9 @@ namespace Taak.Controllers
             ViewBag.NextPage = 1 == ViewBag.Pages ? 1 : 2;
             tasks.Tasks = tasks.Tasks.Take(pageSize).ToList();
 
+            ViewBag.TimeFrames = Constants.TimeFrames;
+            ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
+
             return View(tasks);
         }
         //POST method searcheable index by anyone
@@ -87,6 +90,9 @@ namespace Taak.Controllers
             ViewBag.NextPage = pageNumber == ViewBag.Pages ? pageNumber : pageNumber + 1;
 
             tasksFiltered.Tasks = tasksFiltered.Tasks.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewBag.TimeFrames = Constants.TimeFrames;
+            ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
             return View("SearchTaskIndex", tasksFiltered);
         }
 
@@ -123,7 +129,7 @@ namespace Taak.Controllers
             ViewBag.NextPage = pageNumber == ViewBag.Pages ? pageNumber : pageNumber + 1;
 
             taakTasks = taakTasks.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-            
+                
             
             return View(taakTasks);
         }

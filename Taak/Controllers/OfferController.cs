@@ -57,7 +57,8 @@ namespace Taak.Controllers
                 var item = new OfferViewModelIndexByWorker(offer, taakTaskRepository);
                 offersViewModelByWorker.Add(item);
             }
-            
+            ViewBag.TimeFrames = Constants.TimeFrames;
+            ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
 
             return View(offersViewModelByWorker);
         }
@@ -93,8 +94,18 @@ namespace Taak.Controllers
             try
             {
                 var model = new OfferModel();
-                var task=TryUpdateModelAsync(model);
-                task.Wait();
+                var task = TryUpdateModelAsync(model);
+                task.Wait(); 
+
+                if (model.Buget < 10)
+                {
+                    ModelState.AddModelError("Buget", "Buget must be at least 10 ");
+                    var offerModel = new OfferViewModelCreate(model.IdTask, model.IdTaskWorker, taakTaskRepository);
+                    ViewBag.TimeFrames = Constants.TimeFrames;
+                    ViewBag.TimeFramesIcons = Constants.TimeFramesIcons;
+                    return View("Create",offerModel);
+                }
+                
                 if (task.Result)
                 {
                     if(!offerRepository.CheckForExistingOffer(model.IdTask, model.IdTaskWorker))
