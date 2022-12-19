@@ -5,3 +5,4 @@
 ![alt text](https://github.com/stefandplac/ASP.NET-MVC-c---TAAK-Take-A-Task-/blob/main/3.jpg)
 ![alt text](https://github.com/stefandplac/ASP.NET-MVC-c---TAAK-Take-A-Task-/blob/main/CriteriiSearchTask.jpg)
 ![alt text](https://github.com/stefandplac/ASP.NET-MVC-c---TAAK-Take-A-Task-/blob/main/WorkerAfisareListaTaskuri.jpg)
+![alt text](https://github.com/stefandplac/ASP.NET-MVC-c---TAAK-Take-A-Task-/blob/main/databaseDiagram22.jpg)
